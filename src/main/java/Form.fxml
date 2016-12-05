@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="119.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text" wrappingWidth="96.13671875" />
+      <Label layoutX="43.0" layoutY="50.0" prefHeight="17.0" prefWidth="70.0" text="Label" />
+   </children>
+</Pane>
