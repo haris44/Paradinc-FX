@@ -1,7 +1,7 @@
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,6 +19,16 @@ public class Form {
     private Game game;
     private Text starsCounter;
 
+    /**
+    inputs : stored to get their values :
+     */
+
+    private TextField languageName;
+    private ChoiceBox paradygmChoice;
+    private Slider robustness;
+    private Slider facility;
+    private ListView platforms;
+
     public Form(Stage primaryStage,Game game){
 
         this.game = game;
@@ -35,30 +45,38 @@ public class Form {
         grid.add(starsCounterLabel,3,0);
         grid.add(starsCounter,4,0);
 
-        Label labelLanguageName = new Label("nom du langage");
+        Label labelLanguageName = new Label("Nom du langage");
         grid.add(labelLanguageName, 0, 1);
 
-        final TextField languageName = new TextField();
+        languageName = new TextField();
         grid.add(languageName, 1, 1);
 
-        Label labelParadygme = new Label("Paradygme du langage");
-        grid.add(labelParadygme,0,2);
+        Label labelParadygm = new Label("Paradygme du langage");
+        grid.add(labelParadygm,0,2);
 
-        final ChoiceBox paradygmChoice = createChoiceBox();
+        paradygmChoice = new ChoiceBox(ParadygmType.toObservable());
         grid.add(paradygmChoice,1,2);
 
+        Label labelPlatform = new Label("Plateformes supportées : ");
+        grid.add(labelPlatform,0,3);
+
+        this.platforms = createPlatformChoice();
+        grid.add(platforms,1,3);
+
         Triple<Slider,Label,Label> robustness = createSlider("Robustesse du langage",0,100);
-        grid.add(robustness.y,0,3);
-        grid.add(robustness.x,1,3);
-        grid.add(robustness.z,2,3);
+        grid.add(robustness.y,0,4);
+        grid.add(robustness.x,1,4);
+        grid.add(robustness.z,2,4);
+        this.robustness = robustness.x;
 
         Triple<Slider,Label,Label> facility = createSlider("Simplicité du langage",0,100);
-        grid.add(facility.y,0,4);
-        grid.add(facility.x,1,4);
-        grid.add(facility.z,2,4);
+        grid.add(facility.y,0,5);
+        grid.add(facility.x,1,5);
+        grid.add(facility.z,2,5);
+        this.facility = facility.x;
 
-        HBox hbBtn = createButton(languageName,paradygmChoice,robustness.x,facility.x);
-        grid.add(hbBtn, 0, 6);
+        HBox hbBtn = createButton();
+        grid.add(hbBtn, 0, 7);
     }
 
     public GridPane createGrid(){
@@ -68,13 +86,6 @@ public class Form {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
         return grid;
-    }
-    public ChoiceBox createChoiceBox() {
-        return new ChoiceBox(FXCollections.observableArrayList(
-            ParadygmType.Fonctionel,
-            ParadygmType.Imperatif,
-            ParadygmType.Object
-        ));
     }
 
     public Scene createScene(Stage primaryStage, GridPane grid){
@@ -88,8 +99,7 @@ public class Form {
         return scene;
     }
 
-    public HBox createButton(final TextField languageName, final ChoiceBox paradygm,
-                             final Slider robustness, final Slider facility)    {
+    public HBox createButton()    {
         Button btn = new Button("Créez votre incroyable langage !");
         btn.getStyleClass().add("button");
         HBox hbBtn = new HBox(10);
@@ -99,9 +109,10 @@ public class Form {
             @Override
             public void handle(ActionEvent e) {
                 System.out.println(languageName.getText());
-                System.out.println(paradygm.getValue());
+                System.out.println(paradygmChoice.getValue());
                 System.out.println((int)robustness.getValue());
                 System.out.println((int)facility.getValue());
+                System.out.print(platforms.getSelectionModel().getSelectedItems());
             }
         });
         return hbBtn;
@@ -117,6 +128,7 @@ public class Form {
                 Integer gap = newValue.intValue()-oldValue.intValue();
                 Integer currentStars = game.getStars();
                 Integer nextStars = currentStars - gap;
+
                 if (nextStars>=0 && nextStars<=100) {
                     labelValue.setText(value.toString());
                     game.setStars(nextStars);
@@ -129,6 +141,23 @@ public class Form {
             }
         });
         return new Triple<Slider,Label,Label>(slider,label,labelValue);
+    }
+
+    public ListView createPlatformChoice(){
+        final ListView<PlatformType> platformList = new ListView(PlatformType.toObservable());
+        platformList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        platformList.setOnMouseClicked(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                /**
+                 * need to check if inputs arealready selected, to avoid removing stars when select/unselect input
+                 */
+                Integer stars = platformList.getSelectionModel().getSelectedItems().size();
+             //   game.setStars(game.getStars() - (stars*10));
+             //   starsCounter.setText(game.getStars().toString());
+            }
+        });
+        return platformList;
     }
 }
 
