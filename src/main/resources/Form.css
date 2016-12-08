@@ -1,7 +1,29 @@
 .grid {
-    -fx-background-color: #f5f5f5;
+    -fx-background: #20629F;
+    -fx-background-color: linear-gradient( #2F567A 0%, #2567A4 50%, #296BA8 100%);
+    -fx-background-insets: 0,1,4,5,6;
+    -fx-background-image: url("grid.png");
+    -fx-background-repeat: repeat;
+}
+Label{
+    -fx-text-fill: #f5f5f5;
+}
+.title{
+    -fx-text-fill: #f5f5f5;
 }
 .button{
-    -fx-border-radius: 0px;
-    -fx-border-color: transparent;
+    -fx-background-color:#F44336;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+    -fx-border-radius: 0;
+}
+.button:pressed{
+    -fx-background-color:#E53935;
+}
+.button Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
 }

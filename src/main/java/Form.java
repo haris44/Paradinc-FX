@@ -16,14 +16,24 @@ import javafx.stage.Stage;
  * Created by Nathan on 02/12/2016.
  */
 public class Form {
-    public Form(Stage primaryStage){
+    private Game game;
+    private Text starsCounter;
 
+    public Form(Stage primaryStage,Game game){
+
+        this.game = game;
         GridPane grid = createGrid();
         grid.getStyleClass().add("grid");
         Scene scene = createScene(primaryStage, grid);
 
         Text sceneTitle = new Text("Personalisez votre langage de programmation : ");
+        sceneTitle.getStyleClass().add("title");
         grid.add(sceneTitle, 0, 0, 2, 1);
+
+        Label starsCounterLabel = new Label("Stars disponibles : ");
+        starsCounter = new Text();
+        grid.add(starsCounterLabel,3,0);
+        grid.add(starsCounter,4,0);
 
         Label labelLanguageName = new Label("nom du langage");
         grid.add(labelLanguageName, 0, 1);
@@ -37,19 +47,18 @@ public class Form {
         final ChoiceBox paradygmChoice = createChoiceBox();
         grid.add(paradygmChoice,1,2);
 
-        Triple<Slider,Label,Label> robustness = createSlider("Robustesse du langage",0,100,1);
+        Triple<Slider,Label,Label> robustness = createSlider("Robustesse du langage",0,100);
         grid.add(robustness.y,0,3);
         grid.add(robustness.x,1,3);
         grid.add(robustness.z,2,3);
 
-        Triple<Slider,Label,Label> facility = createSlider("Simplicité du langage",0,100,1);
+        Triple<Slider,Label,Label> facility = createSlider("Simplicité du langage",0,100);
         grid.add(facility.y,0,4);
         grid.add(facility.x,1,4);
         grid.add(facility.z,2,4);
 
         HBox hbBtn = createButton(languageName,paradygmChoice,robustness.x,facility.x);
         grid.add(hbBtn, 0, 6);
-
     }
 
     public GridPane createGrid(){
@@ -80,7 +89,7 @@ public class Form {
     }
 
     public HBox createButton(final TextField languageName, final ChoiceBox paradygm,
-                             final Slider robustness, final Slider facility){
+                             final Slider robustness, final Slider facility)    {
         Button btn = new Button("Créez votre incroyable langage !");
         btn.getStyleClass().add("button");
         HBox hbBtn = new HBox(10);
@@ -97,15 +106,26 @@ public class Form {
         });
         return hbBtn;
     }
-    public Triple<Slider,Label,Label> createSlider(String labelText, int min, int max, int defaultValue){
+    public Triple<Slider,Label,Label> createSlider(String labelText, int min, int max){
         Label label = new Label(labelText);
         final Label labelValue = new Label();
-        Slider slider = new Slider(min,max,defaultValue);
+        final Slider slider = new Slider(min,max,0);
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 Integer value = newValue.intValue();
-                labelValue.setText(value.toString());
+                Integer gap = newValue.intValue()-oldValue.intValue();
+                Integer currentStars = game.getStars();
+                Integer nextStars = currentStars - gap;
+                if (nextStars>=0 && nextStars<=100) {
+                    labelValue.setText(value.toString());
+                    game.setStars(nextStars);
+                }
+                else{
+                    slider.setValue(oldValue.intValue());
+                    game.setStars(currentStars);
+                }
+                starsCounter.setText(game.getStars().toString());
             }
         });
         return new Triple<Slider,Label,Label>(slider,label,labelValue);

@@ -8,7 +8,9 @@ public class main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Form form = new Form(primaryStage);
+        Game game = new Game();
+        game.setStars(100);
+        Form form = new Form(primaryStage,game);
     }
     public static void main(String[] args) {
         launch(args);
