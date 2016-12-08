@@ -82,9 +82,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
 
-        //world.zoomToCountry(Country.DE);
-        //world.zoomToRegion(europeanUnion);
-        world.zoomToRegion(BusinessRegion.EU);
+        world.zoomToCountry(Country.FR);
     }
 
     @Override public void stop() {
