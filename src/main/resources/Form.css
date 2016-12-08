@@ -1,3 +1,7 @@
-.background {
-    -fx-background-color: #1d1d1d;
+.grid {
+    -fx-background-color: #f5f5f5;
+}
+.button{
+    -fx-border-radius: 0px;
+    -fx-border-color: transparent;
 }
