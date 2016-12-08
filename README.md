@@ -1,8 +1,12 @@
-##World
+##Build
 Need to be build with maven. Actually work with gradle.
 
-##World
+##Source
 Source from https://github.com/HanSolo/worldfx/
 
-##World
+##Todo
+Set the region instead of countries to be selected
+
+
+##Screenshot
 ![World](https://dl.dropboxusercontent.com/u/84552/WorldMapFX.png)

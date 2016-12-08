@@ -49,8 +49,8 @@ public class Main extends Application {
 
 
     @Override public void init() {
-        //europeanUnion = new CountryRegion("EU", BE, GR, LT, PT, BG, ES, LU, RO, CZ, FR, HU, SI, DK, HR, MT, SK, DE, IT, NL, FI, EE, CY, AT, SE, IE, LV, PL, GB);
-        //europeanUnion.setColor(Color.LIGHTBLUE);
+        europeanUnion = new CountryRegion("EU", BE, GR, LT, PT, BG, ES, LU, RO, CZ, FR, HU, SI, DK, HR, MT, SK, DE, IT, NL, FI, EE, CY, AT, SE, IE, LV, PL, GB);
+        europeanUnion.setColor(Color.LIGHTBLUE);
         //for (Country country : europeanUnion.getCountries()) {
         //    country.setColor(Color.rgb(RND.nextInt(127) + 100, 0, RND.nextInt(127) + 128));
         //}
@@ -82,7 +82,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
 
-        world.zoomToCountry(Country.FR);
+        //world.zoomToCountry(Country.FR);
     }
 
     @Override public void stop() {
