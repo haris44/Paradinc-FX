@@ -12,7 +12,7 @@ public class Platform implements Attribute {
         this.popularity = popularity;
     }
 
-    public static Platform createFromPlatformType(PlatformType type){
+    public static Platform fromPlatformType(PlatformType type){
         switch (type){
             case Linux:
                 return new Platform("Linux",60,40);

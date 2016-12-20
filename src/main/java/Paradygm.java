@@ -11,4 +11,12 @@ public class Paradygm implements Attribute {
         this.popularity = popularity;
         this.weight = weight;
     }
+    static Paradygm fromParadygmeType(ParadygmType type){
+        if(ParadygmType.Fonctionel == type)
+            return new Paradygm("Fonctionel",70,30);
+        else if (ParadygmType.Object == type)
+            return new Paradygm("Objet",20,80);
+        else
+            return new Paradygm("Impératif",40,60);
+    }
 }

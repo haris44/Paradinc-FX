@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 /**
  * Created by Nathan on 02/12/2016.
  */
@@ -28,10 +30,11 @@ public class Form {
     private Slider robustness;
     private Slider facility;
     private ListView platforms;
-
+    private Integer latestAdded;
     public Form(Stage primaryStage,Game game){
 
         this.game = game;
+        latestAdded = 0;
         GridPane grid = createGrid();
         grid.getStyleClass().add("grid");
         Scene scene = createScene(primaryStage, grid);
@@ -108,11 +111,19 @@ public class Form {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                System.out.println(languageName.getText());
-                System.out.println(paradygmChoice.getValue());
-                System.out.println((int)robustness.getValue());
-                System.out.println((int)facility.getValue());
-                System.out.print(platforms.getSelectionModel().getSelectedItems());
+                String name = languageName.getText();
+                int robs = (int)robustness.getValue();
+                int faci = (int)facility.getValue();
+                ArrayList<Attribute> attr = new ArrayList<Attribute>();
+                for (Object a: platforms.getSelectionModel().getSelectedItems()){
+                    Platform p = Platform.fromPlatformType(PlatformType.valueOf(a.toString()));
+                    attr.add(p);
+                }
+                ParadygmType para = ParadygmType.valueOf(paradygmChoice.getValue().toString());
+                attr.add(Paradygm.fromParadygmeType(para));
+                Language lang = new Language(name,robs,faci,0,0);
+                lang.setAttributes(attr);
+                System.out.println(lang.toString());
             }
         });
         return hbBtn;
@@ -150,11 +161,20 @@ public class Form {
             @Override
             public void handle(Event event) {
                 /**
-                 * need to check if inputs arealready selected, to avoid removing stars when select/unselect input
+                 * need to check if inputs are already selected, to avoid removing stars when select/unselect input
                  */
                 Integer stars = platformList.getSelectionModel().getSelectedItems().size();
-             //   game.setStars(game.getStars() - (stars*10));
-             //   starsCounter.setText(game.getStars().toString());
+                //Integer unselected = platformList.getItems().size();
+                Integer nextStars =  game.getStars() + (latestAdded*10)-(stars*10);
+                if (nextStars >= 0 && nextStars <= 100){
+                    game.setStars(game.getStars() + (latestAdded*10)  - (stars*10));
+                    latestAdded = stars;
+                } else {
+                    platformList.getSelectionModel().clearSelection();
+                    game.setStars(game.getStars() + (latestAdded*10));
+                    latestAdded = 0;
+                }
+                starsCounter.setText(game.getStars().toString());
             }
         });
         return platformList;

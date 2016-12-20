@@ -9,7 +9,18 @@ public class Language {
     public int facility;
     public int area;
     public int startArea;
-    public ArrayList<Attribute> attributes;
+
+    public ArrayList<Attribute> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(ArrayList<Attribute> attributes) {
+        this.attributes = attributes;
+    }
+    public String toString(){
+        return name.toString() + " " + robustness + " " + facility + " " + area + " " + startArea + " " +this.attributes.toString();
+    }
+    private ArrayList<Attribute> attributes;
 
     public Language(String name, int robustness, int facility, int area, int startArea){
         this.name = name;
