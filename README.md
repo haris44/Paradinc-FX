@@ -1,5 +1,5 @@
 ##Build
-Need to be build with maven. Actually work with gradle.
+Need to be build with maven. Actually working with gradle.
 
 ##Source
 Source from https://github.com/HanSolo/worldfx/
