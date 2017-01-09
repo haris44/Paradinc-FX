@@ -1,17 +1,20 @@
+package model;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * Created by Nathan on 08/12/2016.
+ * Created by Nathan on 07/12/2016.
  */
-public enum PlatformType {
-    Linux,
-    Unix,
-    Windows;
+public enum ParadygmType {
+    Fonctionel,
+    Object,
+    Imperatif;
 
+   // @Override
     public static ObservableList toObservable() {
         ObservableList obs = FXCollections.observableArrayList();
-        for (PlatformType type: PlatformType.values()){
+        for (ParadygmType type: ParadygmType.values()){
             obs.add(type);
         }
         return obs;

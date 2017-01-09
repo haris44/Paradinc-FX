@@ -1,5 +1,7 @@
-import java.util.ArrayList;
+package model;
 
+import java.util.ArrayList;
+import utils.*;
 /**
  * Created by Nathan on 08/12/2016.
  */
@@ -27,4 +29,14 @@ public class Game {
     public void setStars(Integer stars){this.stars = stars;}
     public String getTimeline(){return this.timeline;}
     public void setTimeline(String timeline){this.timeline = timeline;}
+
+    /**
+     * Starts the game once the form is filled.
+     * we now must have a language created
+     */
+    public void start(){
+        Integer TURN_LENGTH = 10;
+        Turn t = new Turn(TURN_LENGTH);
+        t.run();
+    }
 }

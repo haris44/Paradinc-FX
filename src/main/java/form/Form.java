@@ -1,3 +1,5 @@
+package form;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -11,8 +13,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
+import model.*;
+import utils.*;
 
 /**
  * Created by Nathan on 02/12/2016.
@@ -31,7 +34,7 @@ public class Form {
     private Slider facility;
     private ListView platforms;
     private Integer latestAdded;
-    public Form(Stage primaryStage,Game game){
+    public Form(Stage primaryStage, Game game){
 
         this.game = game;
         latestAdded = 0;
@@ -94,7 +97,7 @@ public class Form {
     public Scene createScene(Stage primaryStage, GridPane grid){
         Scene scene = new Scene(grid, 1024, 576);
            scene.getStylesheets().add(
-                Form.class.getResource("Form.css").toExternalForm()
+                Form.class.getResource("../Form.css").toExternalForm()
         );
         primaryStage.setTitle("Parad'inc");
         primaryStage.setScene(scene);
@@ -124,6 +127,9 @@ public class Form {
                 Language lang = new Language(name,robs,faci,0,0);
                 lang.setAttributes(attr);
                 System.out.println(lang.toString());
+                game.setLanguage(lang);
+                // now that or game have a language, we can start tu turn loop !
+                game.start();
             }
         });
         return hbBtn;

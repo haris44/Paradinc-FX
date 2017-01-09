@@ -1,3 +1,5 @@
+package model;
+
 /**
  * Created by Nathan on 02/12/2016.
  */
@@ -11,7 +13,7 @@ public class Paradygm implements Attribute {
         this.popularity = popularity;
         this.weight = weight;
     }
-    static Paradygm fromParadygmeType(ParadygmType type){
+    public static Paradygm fromParadygmeType(ParadygmType type){
         if(ParadygmType.Fonctionel == type)
             return new Paradygm("Fonctionel",70,30);
         else if (ParadygmType.Object == type)
