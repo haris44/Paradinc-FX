@@ -5,7 +5,7 @@ Need to be build with maven. Actually working with gradle.
 Source from https://github.com/HanSolo/worldfx/
 
 ##Todo
-Set the region instead of countries to be selected
+Set the region instead of countries to be selected and when is clicked, set a continent with all the countries.
 
 
 ##Screenshot
