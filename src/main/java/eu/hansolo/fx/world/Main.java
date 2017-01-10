@@ -20,21 +20,16 @@ import eu.hansolo.fx.world.World.Resolution;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.MissingResourceException;
 import java.util.Random;
 
 import static eu.hansolo.fx.world.Country.*;
-import static eu.hansolo.fx.world.Country.GB;
-import static eu.hansolo.fx.world.Country.PL;
 
 
 /**
@@ -46,16 +41,16 @@ public class Main extends Application {
     private static final Random        RND = new Random();
     private              World         world;
     private              CountryRegion europeanUnion;
-
+    private              CountryRegion africaRegion;
 
     @Override public void init() {
-        europeanUnion = new CountryRegion("EU", BE, GR, LT, PT, BG, ES, LU, RO, CZ, FR, HU, SI, DK, HR, MT, SK, DE, IT, NL, FI, EE, CY, AT, SE, IE, LV, PL, GB);
+        europeanUnion = new CountryRegion("EU", US, BE, GR, LT, PT, BG, ES, LU, RO, CZ, FR, HU, SI, DK, HR, MT, SK, DE, IT, NL, FI, EE, CY, AT, SE, IE, LV, PL, GB);
         europeanUnion.setColor(Color.LIGHTBLUE);
         //for (Country country : europeanUnion.getCountries()) {
         //    country.setColor(Color.rgb(RND.nextInt(127) + 100, 0, RND.nextInt(127) + 128));
         //}
 
-        //BusinessRegion.EU.setColor(Color.rgb(124, 208, 255));
+        BusinessRegion.EU.setColor(Color.rgb(124, 208, 255));
         //BusinessRegion.APAC.setColor(Color.LIGHTSALMON);
         world = WorldBuilder.create()
                             .resolution(Resolution.HI_RES)
