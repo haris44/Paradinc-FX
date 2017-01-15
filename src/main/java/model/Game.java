@@ -49,8 +49,6 @@ public class Game {
         this.nextEvents = nextEvents;
     }
 
-    ;
-
     public Integer getStars() {
         return this.stars;
     }

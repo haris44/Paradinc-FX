@@ -32,4 +32,44 @@ public class Language {
         this.startArea = startArea;
         this.attributes = new ArrayList<Attribute>();
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getRobustness() {
+        return robustness;
+    }
+
+    public void setRobustness(int robustness) {
+        this.robustness = robustness;
+    }
+
+    public int getFacility() {
+        return facility;
+    }
+
+    public void setFacility(int facility) {
+        this.facility = facility;
+    }
+
+    public int getArea() {
+        return area;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
+    }
+
+    public int getStartArea() {
+        return startArea;
+    }
+
+    public void setStartArea(int startArea) {
+        this.startArea = startArea;
+    }
 }

@@ -24,7 +24,6 @@ public class ParadincMap {
 
         this.world = WorldBuilder.create()
                 .resolution(World.Resolution.HI_RES)
-                .zoomEnabled(true)
                 .selectionEnabled(true)
                 .build();
     }

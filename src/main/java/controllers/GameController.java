@@ -1,7 +1,11 @@
 package controllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Game;
+import model.Language;
 import utils.Turn;
 import views.Map;
 
@@ -12,6 +16,7 @@ public class GameController {
 
     Game game;
     Stage stage;
+    public Map mapViews;
 
     public GameController(Stage stage, Game game){
         this.stage = stage;
@@ -19,14 +24,27 @@ public class GameController {
     }
 
     public void startGame(){
+
+        mapViews = new Map(stage, this);
         this.start();
-        new Map(stage);
+    }
+
+    public Language getLanguage(){
+        return game.getLanguage();
     }
 
     private void start() {
         Integer TURN_LENGTH = 10;
         Turn t = new Turn(TURN_LENGTH);
-        t.run();
+        t.run(this);
+    }
+
+    public void turn(){
+
+        System.out.print("tour here");
+//        if(mapViews != null){
+//            mapViews.notifyTour();
+//        }
     }
 
 }
