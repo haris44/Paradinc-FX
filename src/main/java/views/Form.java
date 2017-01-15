@@ -1,5 +1,6 @@
-package form;
+package views;
 
+import controllers.GameController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -34,8 +35,10 @@ public class Form {
     private Slider facility;
     private ListView platforms;
     private Integer latestAdded;
+    private Stage primaryStage;
     public Form(Stage primaryStage, Game game){
 
+        this.primaryStage = primaryStage;
         this.game = game;
         latestAdded = 0;
         GridPane grid = createGrid();
@@ -127,9 +130,11 @@ public class Form {
                 Language lang = new Language(name,robs,faci,0,0);
                 lang.setAttributes(attr);
                 System.out.println(lang.toString());
+
+
                 game.setLanguage(lang);
                 // now that or game have a language, we can start tu turn loop !
-                game.start();
+                new GameController(primaryStage, game).startGame();
             }
         });
         return hbBtn;
