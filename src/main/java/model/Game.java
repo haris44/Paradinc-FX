@@ -46,4 +46,19 @@ public class Game {
     }
 
 
+    public ArrayList<Event> getEvent() {
+        return event;
+    }
+
+    public void setEvent(ArrayList<Event> event) {
+        this.event = event;
+    }
+
+    public ArrayList<ThrowableEvent> getPossibleEvent() {
+        return possibleEvent;
+    }
+
+    public void setPossibleEvent(ArrayList<ThrowableEvent> possibleEvent) {
+        this.possibleEvent = possibleEvent;
+    }
 }

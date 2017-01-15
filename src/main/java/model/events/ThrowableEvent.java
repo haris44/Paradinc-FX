@@ -6,9 +6,9 @@ import model.events.Event;
  * Created by Alex on 05/12/2016.
  */
 public class ThrowableEvent {
-	Event event;
-	int durability;
-	int probability;
+	public Event event;
+	public int durability;
+	public int probability;
 
 	public ThrowableEvent(Event event, int durability, int probability){
 		this.durability = durability;

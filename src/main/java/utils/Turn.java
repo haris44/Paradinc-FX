@@ -3,6 +3,7 @@ package utils;
 import controllers.GameController;
 import javafx.application.Platform;
 import model.events.Event;
+import model.events.ThrowableEvent;
 
 import java.util.Date;
 import java.util.Timer;
@@ -35,7 +36,7 @@ public class Turn {
                 Platform.runLater(new Runnable() {
                     public void run() {
                         System.out.println(new Date());
-                        gamectrl.turn();
+                        gamectrl.turn(new ArrayList<ThrowableEvent>());
                         gamectrl.mapViews.notifyTour();
                     }
                 });
