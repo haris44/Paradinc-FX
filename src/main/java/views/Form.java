@@ -1,6 +1,7 @@
 package views;
 
 import controllers.GameController;
+import factory.GameFactory;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import model.*;
+import model.language.*;
 import utils.*;
 
 /**
@@ -36,10 +38,12 @@ public class Form {
     private ListView platforms;
     private Integer latestAdded;
     private Stage primaryStage;
-    public Form(Stage primaryStage, Game game){
+
+    private Integer selectedStars = 100;
+
+    public Form(Stage primaryStage){
 
         this.primaryStage = primaryStage;
-        this.game = game;
         latestAdded = 0;
         GridPane grid = createGrid();
         grid.getStyleClass().add("grid");
@@ -131,8 +135,7 @@ public class Form {
                 lang.setAttributes(attr);
                 System.out.println(lang.toString());
 
-
-                game.setLanguage(lang);
+                Game game = GameFactory.createGame(lang, selectedStars);
                 // now that or game have a language, we can start tu turn loop !
                 new GameController(primaryStage, game).startGame();
             }
@@ -148,18 +151,18 @@ public class Form {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 Integer value = newValue.intValue();
                 Integer gap = newValue.intValue()-oldValue.intValue();
-                Integer currentStars = game.getStars();
+                Integer currentStars = selectedStars;
                 Integer nextStars = currentStars - gap;
 
                 if (nextStars>=0 && nextStars<=100) {
                     labelValue.setText(value.toString());
-                    game.setStars(nextStars);
+                    selectedStars = nextStars;
                 }
                 else{
                     slider.setValue(oldValue.intValue());
-                    game.setStars(currentStars);
+                    selectedStars = currentStars;
                 }
-                starsCounter.setText(game.getStars().toString());
+                starsCounter.setText(selectedStars.toString());
             }
         });
         return new Triple<Slider,Label,Label>(slider,label,labelValue);
@@ -176,16 +179,16 @@ public class Form {
                  */
                 Integer stars = platformList.getSelectionModel().getSelectedItems().size();
                 //Integer unselected = platformList.getItems().size();
-                Integer nextStars =  game.getStars() + (latestAdded*10)-(stars*10);
+                Integer nextStars =  selectedStars + (latestAdded*10) - (stars*10);
                 if (nextStars >= 0 && nextStars <= 100){
-                    game.setStars(game.getStars() + (latestAdded*10)  - (stars*10));
+                    selectedStars = selectedStars + (latestAdded*10)  - (stars*10);
                     latestAdded = stars;
                 } else {
                     platformList.getSelectionModel().clearSelection();
-                    game.setStars(game.getStars() + (latestAdded*10));
+                    selectedStars = selectedStars + (latestAdded*10);
                     latestAdded = 0;
                 }
-                starsCounter.setText(game.getStars().toString());
+                starsCounter.setText(selectedStars.toString());
             }
         });
         return platformList;

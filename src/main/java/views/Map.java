@@ -54,11 +54,9 @@ public class Map {
         rightBarPan.setMinHeight(WindowSize.RIGHT_BAR_Y);
         rightBarPan.setMinWidth(WindowSize.RIGHT_BAR_X);
 
-
         root.getChildren().add(rightBarPan);
         root.getChildren().add(mapPan);
         root.getChildren().add(topBarPan);
-
 
         stage.setTitle("Parad'Inc");
         stage.setScene(scene);
@@ -66,14 +64,11 @@ public class Map {
     }
 
     public synchronized void notifyTour() {
-        try {
-            compteur = compteur + 1;
-            topBarPan.getChildren().remove(tour);
-            tour.setText("tour n°" + compteur);
-            topBarPan.getChildren().add(tour);
-        } catch (Exception e) {
-            System.out.print(e);
-        }
+        compteur = compteur + 1;
+        topBarPan.getChildren().remove(tour);
+        tour.setText("tour n°" + compteur);
+        topBarPan.getChildren().add(tour);
+
     }
 
 }

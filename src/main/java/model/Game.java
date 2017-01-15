@@ -2,27 +2,23 @@ package model;
 
 import java.util.ArrayList;
 
-import utils.*;
+import model.events.Event;
+import model.events.ThrowableEvent;
+import model.language.Language;
 
-/**
- * Created by Nathan on 08/12/2016.
- */
+
 public class Game {
     protected Language language;
-    protected ArrayList<GameEvent> possibleEvents;
-    protected ArrayList<GameEvent> nextEvents;
     protected Integer stars;
-    protected String timeline;
+    protected Timeline timeline;
+    protected ArrayList<Event> event;
+    protected ArrayList<ThrowableEvent> possibleEvent;
 
-    public Game() {
-    }
-
-    public Game(Language language, ArrayList<GameEvent> possibleEvents, ArrayList<GameEvent> nextEvents, Integer stars, String timeline) {
+    public Game(Language language, Integer stars, Timeline timeline, ArrayList<Event> event) {
         this.language = language;
-        this.possibleEvents = possibleEvents;
-        this.nextEvents = nextEvents;
         this.stars = stars;
         this.timeline = timeline;
+        this.event = event;
     }
 
     public Language getLanguage() {
@@ -33,22 +29,6 @@ public class Game {
         this.language = language;
     }
 
-    public ArrayList<GameEvent> getPossibleEvents() {
-        return this.possibleEvents;
-    }
-
-    public void setPossibleEvents(ArrayList<GameEvent> possibleEvents) {
-        this.possibleEvents = possibleEvents;
-    }
-
-    public ArrayList<GameEvent> getNextEvents() {
-        return this.nextEvents;
-    }
-
-    public void setNextEvents(ArrayList<GameEvent> nextEvents) {
-        this.nextEvents = nextEvents;
-    }
-
     public Integer getStars() {
         return this.stars;
     }
@@ -57,11 +37,11 @@ public class Game {
         this.stars = stars;
     }
 
-    public String getTimeline() {
+    public Timeline getTimeline() {
         return this.timeline;
     }
 
-    public void setTimeline(String timeline) {
+    public void setTimeline(Timeline timeline) {
         this.timeline = timeline;
     }
 

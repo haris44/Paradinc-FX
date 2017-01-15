@@ -18,9 +18,7 @@ public class main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Game game = new Game();
-        game.setStars(100);
-        Form form = new Form(primaryStage,game);
+        Form form = new Form(primaryStage);
     }
 
 //    @Override

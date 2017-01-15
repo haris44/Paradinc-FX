@@ -2,16 +2,12 @@ package utils;
 
 import controllers.GameController;
 import javafx.application.Platform;
-import model.Action;
+import model.events.Event;
 
-import java.time.Period;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 
 
@@ -23,8 +19,8 @@ public class Turn {
     // specifies the length (in seconds) of a turn
     private Integer length;
     ScheduledExecutorService service;
-    private ArrayList<Action> nextActions = new ArrayList<Action>();
-    private ArrayList<Action> pastActions = new ArrayList<Action>();
+    private ArrayList<Event> nextActions = new ArrayList<Event>();
+    private ArrayList<Event> pastActions = new ArrayList<Event>();
 
     public Turn(Integer length) {
         this.length = length;
@@ -49,16 +45,16 @@ public class Turn {
 
     }
 
-    public ArrayList<Action> addAction(Action action) {
+    public ArrayList<Event> addAction(Event action) {
         nextActions.add(action);
         return nextActions;
     }
 
-    public ArrayList<Action> getNextActions() {
+    public ArrayList<Event> getNextActions() {
         return nextActions;
     }
 
-    public ArrayList<Action> getPastActions() {
+    public ArrayList<Event> getPastActions() {
         return pastActions;
     }
 }

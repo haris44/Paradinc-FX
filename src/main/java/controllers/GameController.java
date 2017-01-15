@@ -1,11 +1,8 @@
 package controllers;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import model.Game;
-import model.Language;
+import model.language.Language;
 import utils.Turn;
 import views.Map;
 
@@ -21,6 +18,7 @@ public class GameController {
     public GameController(Stage stage, Game game){
         this.stage = stage;
         this.game = game;
+
     }
 
     public void startGame(){

@@ -1,4 +1,4 @@
-package model;
+package model.language;
 
 /**
  * Created by Nathan on 08/12/2016.
