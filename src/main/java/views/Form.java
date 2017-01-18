@@ -1,5 +1,6 @@
 package views;
 
+import javafx.beans.property.ReadOnlyIntegerProperty;
 import controllers.GameController;
 import factory.GameFactory;
 import javafx.beans.value.ChangeListener;
@@ -38,8 +39,14 @@ public class Form {
     private ListView platforms;
     private Integer latestAdded;
     private Stage primaryStage;
-
     private Integer selectedStars = 100;
+
+    private Text languageNameError;
+    private Text paraDygmeChoiceError;
+    private Text platformsError;
+    private Text facilityError;
+    private Text robustnessError;
+
 
     public Form(Stage primaryStage){
 
@@ -60,32 +67,44 @@ public class Form {
 
         Label labelLanguageName = new Label("Nom du langage");
         grid.add(labelLanguageName, 0, 1);
-
         languageName = new TextField();
         grid.add(languageName, 1, 1);
+        languageNameError = new Text();
+        languageNameError.getStyleClass().add("error");
+        grid.add(languageNameError,2,1);
 
         Label labelParadygm = new Label("Paradygme du langage");
         grid.add(labelParadygm,0,2);
-
         paradygmChoice = new ChoiceBox(ParadygmType.toObservable());
         grid.add(paradygmChoice,1,2);
+        paraDygmeChoiceError = new Text();
+        paraDygmeChoiceError.getStyleClass().add("error");
+        grid.add(paraDygmeChoiceError,2,2);
 
         Label labelPlatform = new Label("Plateformes supportées : ");
         grid.add(labelPlatform,0,3);
-
         this.platforms = createPlatformChoice();
         grid.add(platforms,1,3);
+        platformsError = new Text();
+        platformsError.getStyleClass().add("error");
+        grid.add(platformsError,2,3);
 
         Triple<Slider,Label,Label> robustness = createSlider("Robustesse du langage",0,100);
+        robustnessError = new Text();
+        robustnessError.getStyleClass().add("error");
         grid.add(robustness.y,0,4);
         grid.add(robustness.x,1,4);
         grid.add(robustness.z,2,4);
+        grid.add(robustnessError,3,4);
         this.robustness = robustness.x;
 
         Triple<Slider,Label,Label> facility = createSlider("Simplicité du langage",0,100);
+        facilityError = new Text();
+        facilityError.getStyleClass().add("error");
         grid.add(facility.y,0,5);
         grid.add(facility.x,1,5);
         grid.add(facility.z,2,5);
+        grid.add(facilityError,3,5);
         this.facility = facility.x;
 
         HBox hbBtn = createButton();
@@ -111,6 +130,47 @@ public class Form {
         primaryStage.show();
         return scene;
     }
+    public void clearErrors(){
+        languageNameError.setText("");
+        robustnessError.setText("");
+        facilityError.setText("");
+        platformsError.setText("");
+        paraDygmeChoiceError.setText("");
+
+    }
+
+    public boolean validate() {
+        boolean isValid = true;
+        String emptyError = "Ce champ ne peut pas être vide";
+        clearErrors();
+        if(languageName.getText().isEmpty()){
+            isValid = false;
+            languageNameError.setText(emptyError);
+        }
+        if(Double.isNaN(robustness.getValue())) {
+            isValid = false;
+            robustnessError.setText(emptyError);
+        }
+
+        if(Double.isNaN(facility.getValue())) {
+            isValid = false;
+            facilityError.setText(emptyError);
+        }
+
+        ReadOnlyIntegerProperty platformIndex = platforms.getSelectionModel().selectedIndexProperty();
+        if(platformIndex.get() == -1) {
+            isValid = false;
+            platformsError.setText(emptyError);
+        }
+
+        ReadOnlyIntegerProperty paradygmIndex = paradygmChoice.getSelectionModel().selectedIndexProperty();
+        if(paradygmIndex.get() == -1){
+            isValid = false;
+            paraDygmeChoiceError.setText(emptyError);
+        }
+
+        return isValid;
+    }
 
     public HBox createButton()    {
         Button btn = new Button("Créez votre incroyable langage !");
@@ -121,23 +181,27 @@ public class Form {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                String name = languageName.getText();
-                int robs = (int)robustness.getValue();
-                int faci = (int)facility.getValue();
-                ArrayList<Attribute> attr = new ArrayList<Attribute>();
-                for (Object a: platforms.getSelectionModel().getSelectedItems()){
-                    Platform p = Platform.fromPlatformType(PlatformType.valueOf(a.toString()));
-                    attr.add(p);
-                }
-                ParadygmType para = ParadygmType.valueOf(paradygmChoice.getValue().toString());
-                attr.add(Paradygm.fromParadygmeType(para));
-                Language lang = new Language(name,robs,faci,0,0);
-                lang.setAttributes(attr);
-                System.out.println(lang.toString());
+                if(validate()){
 
-                Game game = GameFactory.createGame(lang, selectedStars);
-                // now that or game have a language, we can start tu turn loop !
-                new GameController(primaryStage, game).startGame();
+                    String name = languageName.getText();
+                    int robs = (int)robustness.getValue();
+                    int faci = (int)facility.getValue();
+                    ArrayList<Attribute> attr = new ArrayList<Attribute>();
+                    for (Object a: platforms.getSelectionModel().getSelectedItems()){
+                        Platform p = Platform.fromPlatformType(PlatformType.valueOf(a.toString()));
+                        attr.add(p);
+                    }
+                    ParadygmType para = ParadygmType.valueOf(paradygmChoice.getValue().toString());
+                    attr.add(Paradygm.fromParadygmeType(para));
+                    Language lang = new Language(name,robs,faci,0,0);
+                    lang.setAttributes(attr);
+                    System.out.println(lang.toString());
+
+                    Game game = GameFactory.createGame(lang, selectedStars);
+                    // now that or game have a language, we can start tu turn loop !
+                    new GameController(primaryStage, game).startGame();
+                }
+
             }
         });
         return hbBtn;
