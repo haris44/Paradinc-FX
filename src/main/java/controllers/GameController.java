@@ -2,11 +2,13 @@ package controllers;
 
 import javafx.stage.Stage;
 import model.Game;
+import model.Timeline;
 import model.events.Event;
 import model.events.ThrowableEvent;
 import model.language.Language;
 import utils.Turn;
 import views.Map;
+import views.TimelineView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,16 +21,20 @@ public class GameController {
     Game game;
     Stage stage;
     public Map mapViews;
+    public TimelineView timelineView;
 
     public GameController(Stage stage, Game game){
         this.stage = stage;
         this.game = game;
 
     }
-
+    public Game getGame(){
+        return this.game;
+    }
     public void startGame(){
 
         mapViews = new Map(stage, this);
+        timelineView = new TimelineView(stage, this);
         this.start();
     }
 

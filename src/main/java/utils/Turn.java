@@ -38,6 +38,7 @@ public class Turn {
                         System.out.println(new Date());
                         gamectrl.turn(new ArrayList<ThrowableEvent>());
                         gamectrl.mapViews.notifyTour();
+                        gamectrl.timelineView.notifyTurn();
                     }
                 });
             }
