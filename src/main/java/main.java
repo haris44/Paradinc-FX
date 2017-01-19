@@ -18,6 +18,7 @@ public class main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         Form form = new Form(primaryStage);
     }
 

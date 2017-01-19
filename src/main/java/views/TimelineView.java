@@ -3,6 +3,7 @@ package views;
 import controllers.GameController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -23,15 +24,20 @@ public class TimelineView {
     private Text turnCounter;
     private Integer turnNumber = 0;
     public TimelineView(Stage stage, GameController controller){
+
         this.gameCtrl = controller;
         this.stage = stage;
-        view = (StackPane) stage.getScene().getRoot().getChildrenUnmodifiable().get(0);
-        view.setBackground(new Background(new BackgroundFill(Color.GREY, CornerRadii.EMPTY, Insets.EMPTY)));
-        view.getChildren().add(grid);
 
-        Text turnCounterLable = new Text("Tour : ");
-        turnCounterLable.getStyleClass().add("title");
-        grid.add(turnCounterLable, 0, 0);
+
+        view = (StackPane) stage.getScene().getRoot().getChildrenUnmodifiable().get(0);
+        view.getStylesheets().add("Timeline.css");
+        view.setBackground(new Background(new BackgroundFill(Color.web("#3f3f4f"), CornerRadii.EMPTY, Insets.EMPTY)));
+        view.getChildren().add(grid);
+        view.getStyleClass().add("timeline");
+
+        Text turnCounterLabel = new Text("Tour : ");
+        turnCounterLabel.getStyleClass().add("title");
+        grid.add(turnCounterLabel, 0, 0);
         turnCounter = new Text(turnNumber.toString());
         grid.add(turnCounter, 1,0);
 
@@ -46,6 +52,10 @@ public class TimelineView {
         grid.add(globalInfectionLabel,3,2);
         globalInfection = new Text("10 %");
         grid.add(globalInfection,4,2);
+
+        stage.getScene().getStylesheets().add(
+                getClass().getResource("../Timeline.css").toExternalForm()
+        );
     }
 
     /**

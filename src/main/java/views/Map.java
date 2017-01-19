@@ -29,6 +29,12 @@ public class Map {
     public Map(Stage stage, GameController controller) {
         Group root = new Group();
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(
+            Map.class.getResource("../Map.css").toExternalForm()
+        );
+        scene.getStylesheets().add(
+                Map.class.getResource("../Timeline.css").toExternalForm()
+        );
 
         World map = new ParadincMap().getWorld();
         StackPane mapPan = new StackPane(map);
