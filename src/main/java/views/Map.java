@@ -68,7 +68,6 @@ public class Map {
         topBarPan.getChildren().remove(tour);
         tour.setText("tour n°" + compteur);
         topBarPan.getChildren().add(tour);
-
     }
 
 }

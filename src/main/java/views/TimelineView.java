@@ -19,7 +19,9 @@ public class TimelineView {
     StackPane view;
     GridPane grid = createGrid();
     private Text starsCounter;
-
+    private Text globalInfection;
+    private Text turnCounter;
+    private Integer turnNumber = 0;
     public TimelineView(Stage stage, GameController controller){
         this.gameCtrl = controller;
         this.stage = stage;
@@ -27,24 +29,35 @@ public class TimelineView {
         view.setBackground(new Background(new BackgroundFill(Color.GREY, CornerRadii.EMPTY, Insets.EMPTY)));
         view.getChildren().add(grid);
 
+        Text turnCounterLable = new Text("Tour : ");
+        turnCounterLable.getStyleClass().add("title");
+        grid.add(turnCounterLable, 0, 0);
+        turnCounter = new Text(turnNumber.toString());
+        grid.add(turnCounter, 1,0);
 
         Text starsCounterLabel = new Text("Stars : ");
         starsCounterLabel.getStyleClass().add("title");
-        grid.add(starsCounterLabel, 0, 0);
-
+        grid.add(starsCounterLabel, 0, 2);
         starsCounter = new Text(gameCtrl.getGame().getStars().toString());
-        grid.add(starsCounter, 0,1);
+        grid.add(starsCounter, 1,2);
+
+        Text globalInfectionLabel = new Text("Population infectée :");
+        globalInfectionLabel.getStyleClass().add("title");
+        grid.add(globalInfectionLabel,3,2);
+        globalInfection = new Text("10 %");
+        grid.add(globalInfection,4,2);
     }
 
     /**
      * started by the a Turn, it updates the timeline component with new data
      */
-    public void notifyTurn(){
+    public synchronized void notifyTurn(){
+        turnNumber += 1;
+        turnCounter.setText(turnNumber.toString());
         starsCounter.setText(gameCtrl.getGame().getStars().toString());
     }
     public GridPane createGrid(){
         GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(20);
         grid.setPadding(new Insets(10));
