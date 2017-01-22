@@ -13,5 +13,8 @@
     <orderEntry type="library" name="Maven: org.kordamp.ikonli:ikonli-core:1.9.0" level="project" />
     <orderEntry type="library" name="Maven: org.kordamp.ikonli:ikonli-javafx:1.9.0" level="project" />
     <orderEntry type="library" name="Maven: org.kordamp.ikonli:ikonli-materialdesign-pack:1.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.kordamp.ikonli:ikonli-core:1.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.kordamp.ikonli:ikonli-javafx:1.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.kordamp.ikonli:ikonli-materialdesign-pack:1.9.0" level="project" />
   </component>
 </module>
