@@ -43,8 +43,7 @@ public class GameController {
     }
 
     private void start() {
-        Integer TURN_LENGTH = 10;
-        Turn t = new Turn(TURN_LENGTH);
+        Turn t = new Turn(5);
         t.run(this);
     }
 

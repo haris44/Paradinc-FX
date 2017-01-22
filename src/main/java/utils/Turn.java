@@ -42,7 +42,7 @@ public class Turn {
                     }
                 });
             }
-        }, delay, 1000);
+        }, 1000, length * 1000);
 
 
     }
