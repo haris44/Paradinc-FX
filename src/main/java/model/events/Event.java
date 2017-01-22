@@ -13,10 +13,14 @@ public abstract class Event {
 	int price;
 	String nom;
 	boolean buyable = false;
+	int lenghtStars;
+	int lenghtContamination;
 
 
-	public Event(String nom, int price){
+	public Event(String nom, int price, int lenghtStars, int lenghtContamination){
 		this.nom = nom;
+		this.lenghtContamination = lenghtContamination;
+		this.lenghtStars = lenghtStars;
 		this.price = price;
 		if(price > 0 ){
 			this.buyable = true;

@@ -128,4 +128,8 @@ public class TimelineView {
         });
         return hbBtn;
     }
+
+    public void tweet(String nom) {
+        // NOT IMPLEMENTED
+    }
 }
