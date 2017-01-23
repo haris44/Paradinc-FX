@@ -67,15 +67,15 @@ public class TimelineView {
 
         Text globalInfectionLabel = new Text("Population infectée :");
         globalInfectionLabel.getStyleClass().add("title");
-        grid.add(globalInfectionLabel,3,2);
+        grid.add(globalInfectionLabel,0,3);
         globalInfection = new Text("10 %");
-        grid.add(globalInfection,4,2);
+        grid.add(globalInfection,1,3);
 
         String langName = this.gameCtrl.getGame().getLanguage().getName();
         Tweet welcome = new Tweet(new Date(), "Un nouveau langage vient d'apparaitre : " + langName);
         Text tweetsLabel = new Text("Tweets sur votre langage :");
         tweetsLabel.getStyleClass().add("title");
-        grid.add(tweetsLabel,0,3);
+        grid.add(tweetsLabel,0,4);
         tweets = FXCollections.observableArrayList(welcome);
         tweetsView = new ListView<Tweet>(tweets);
         tweets.addListener((ListChangeListener<Tweet>) change -> {
@@ -86,7 +86,7 @@ public class TimelineView {
                 }
             }
         });
-        grid.add(tweetsView,0,4);
+        grid.add(tweetsView,0,5);
         stage.getScene().getStylesheets().add(
                 getClass().getResource("../Timeline.css").toExternalForm()
         );
