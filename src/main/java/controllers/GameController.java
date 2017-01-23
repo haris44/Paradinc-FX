@@ -22,10 +22,13 @@ public class GameController {
     Stage stage;
     public Map mapViews;
     public TimelineView timelineView;
+    public ArrayList<ThrowableEvent> turnEvent;
+    private Turn t;
 
     public GameController(Stage stage, Game game){
         this.stage = stage;
         this.game = game;
+        turnEvent = new ArrayList<>();
 
     }
     public Game getGame(){
@@ -43,17 +46,47 @@ public class GameController {
     }
 
     private void start() {
-        Integer TURN_LENGTH = 10;
-        Turn t = new Turn(TURN_LENGTH);
+        t = new Turn(5);
         t.run(this);
     }
 
-    public ArrayList<ThrowableEvent> turn(ArrayList<ThrowableEvent> choosenEvent){
+
+    public void turn(){
+        ArrayList<ThrowableEvent> randomEvent = PickedRandomEvent();
+        turnEvent.addAll(randomEvent);
+        for (ThrowableEvent ev : turnEvent) {
+            ev.throwEvent(this, timelineView);
+        }
+        turnEvent = new ArrayList<>();
+    }
+
+    public void setStars(int stars){
+        if(stars > 0){
+            game.setStars(stars);
+        } else {
+            game.setStars(0);
+          this.stopGame(false);
+        }
+    }
+
+    private void stopGame(boolean win){
+        t.stop();
+        if(win){
+            System.out.println("Vous avez gagner");
+        }
+        else{
+            System.out.println("Vous avez perdu");
+        }
+    }
+    public int getStars(){
+        return game.getStars();
+    }
+    private ArrayList<ThrowableEvent> PickedRandomEvent(){
 
         Random rand = new Random();
         ThrowableEvent currEvent = null;
 
-        int nombrePickEvent = rand.nextInt(3); //Entre 1 et la sommes des ponderation
+        int nombrePickEvent = rand.nextInt(3); // nombre d'event qui vont être picked
 
         game.setPossibleEvent(new ArrayList<ThrowableEvent>());
         for (Event ev :game.getEvent()) {
@@ -69,10 +102,7 @@ public class GameController {
             pickedEvents.add(picked);
 
         }
-
-        choosenEvent.addAll(pickedEvents);
-
-        return choosenEvent;
+        return pickedEvents;
 
     }
 

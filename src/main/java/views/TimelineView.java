@@ -104,6 +104,7 @@ public class TimelineView {
             this.tweets.add(tenTurns);
         }
     }
+
     public GridPane createGrid(){
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -126,5 +127,9 @@ public class TimelineView {
             }
         });
         return hbBtn;
+    }
+
+    public void tweet(String nom) {
+        // NOT IMPLEMENTED
     }
 }

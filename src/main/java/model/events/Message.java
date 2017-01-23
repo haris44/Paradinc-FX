@@ -7,11 +7,8 @@ import model.Game;
  */
 public class Message extends Event {
 
-
-
-	public Message(String nom, int price){
-		super(nom, price);
-
+	public Message(String nom, int lenghtStars, int lenghtContamination, int price){
+		super(nom, price, lenghtStars, lenghtContamination);
 	}
 
 	@Override

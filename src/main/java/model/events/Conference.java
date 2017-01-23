@@ -7,9 +7,8 @@ import model.Game;
  */
 public class Conference extends Event {
 
-	public Conference(String nom, int price){
-		super(nom, price);
-
+	public Conference(String nom, int price, int lenghtStars, int lenghtContamination){
+		super(nom, price, lenghtStars, lenghtContamination);
 	}
 
 	@Override

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class Turn {
     // specifies the length (in seconds) of a turn
     private Integer length;
-    ScheduledExecutorService service;
+    Timer timer;
     private ArrayList<Event> nextActions = new ArrayList<Event>();
     private ArrayList<Event> pastActions = new ArrayList<Event>();
 
@@ -29,22 +29,24 @@ public class Turn {
 
     public void run(GameController gamectrl) {
         Integer delay = length == null || length < 1 ? 10 : length;
-        Timer timer = new java.util.Timer();
+         timer = new java.util.Timer();
 
         timer.schedule(new TimerTask() {
             public void run() {
                 Platform.runLater(new Runnable() {
                     public void run() {
                         System.out.println(new Date());
-                        gamectrl.turn(new ArrayList<ThrowableEvent>());
+                        gamectrl.turn();
                         gamectrl.mapViews.notifyTour();
                         gamectrl.timelineView.notifyTurn();
                     }
                 });
             }
-        }, delay, 1000);
+        }, 1000, length * 1000);
+    }
 
-
+    public void stop(){
+        timer.cancel();
     }
 
     public ArrayList<Event> addAction(Event action) {
