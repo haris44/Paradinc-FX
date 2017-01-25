@@ -121,7 +121,7 @@ public class Form {
     }
 
     public Scene createScene(Stage primaryStage, GridPane grid){
-        Scene scene = new Scene(grid, 1024, 576);
+        Scene scene = new Scene(grid, 1366, 768);
            scene.getStylesheets().add(
                 Form.class.getResource("../Form.css").toExternalForm()
         );
