@@ -38,6 +38,10 @@ public abstract class Event {
 	public int processAttribute(Pair<Integer, Double> EventProps, int GameProps){
 		return (int) (100 - Math.round(Math.abs(GameProps - EventProps.getKey()))* EventProps.getValue());
 	}
+	public String getName(){
+	    return nom;
+    }
 
+	public boolean isBuyable(){return  this.buyable;}
 	public abstract ThrowableEvent getThrowable(Game game);
 }

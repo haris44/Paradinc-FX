@@ -19,10 +19,14 @@ import javafx.stage.Stage;
 import model.Game;
 import model.Timeline;
 import model.actions.Tweet;
+import model.events.Conference;
+import model.events.Event;
+import model.events.ThrowableEvent;
 import model.language.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Observable;
 
 /**
@@ -45,6 +49,7 @@ public class TimelineView {
 
         this.gameCtrl = controller;
         this.stage = stage;
+        Integer currentRow = 0;
 
 
         view = (StackPane) stage.getScene().getRoot().getChildrenUnmodifiable().get(0);
@@ -55,29 +60,48 @@ public class TimelineView {
 
         Text turnCounterLabel = new Text("Tour : ");
         turnCounterLabel.getStyleClass().add("title");
-        grid.add(turnCounterLabel, 0, 0);
+        grid.add(turnCounterLabel, 0, currentRow);
         turnCounter = new Text(turnNumber.toString());
-        grid.add(turnCounter, 1,0);
+        grid.add(turnCounter, 1,currentRow);
+
+        currentRow +=1;
 
         Text starsCounterLabel = new Text("Stars : ");
         starsCounterLabel.getStyleClass().add("title");
-        grid.add(starsCounterLabel, 0, 2);
+        grid.add(starsCounterLabel, 0, currentRow);
         starsCounter = new Text(gameCtrl.getGame().getStars().toString());
-        grid.add(starsCounter, 1,2);
+        grid.add(starsCounter, 1,currentRow);
+
+        currentRow +=1;
 
         Text globalInfectionLabel = new Text("Population infectée :");
         globalInfectionLabel.getStyleClass().add("title");
-        grid.add(globalInfectionLabel,0,3);
+        grid.add(globalInfectionLabel,0,currentRow);
         globalInfection = new Text("10 %");
-        grid.add(globalInfection,1,3);
+        grid.add(globalInfection,1,currentRow);
+
+        currentRow+=1;
+                /* we add to the grid all events that we can throw */
+        Text throwableEventsLabel = new Text("Actions possibles");
+        throwableEventsLabel.getStyleClass().add("title");
+        grid.add(throwableEventsLabel,0,currentRow);
+        for (Iterator<Button> I = getBuyableEventsButtons().iterator(); I.hasNext(); ) {
+            Button btn = I.next();
+            grid.add(btn,0,currentRow);
+            currentRow +=1;
+        }
+
+
+        currentRow +=1;
 
         String langName = this.gameCtrl.getGame().getLanguage().getName();
         Tweet welcome = new Tweet(new Date(), "Un nouveau langage vient d'apparaitre : " + langName);
         Text tweetsLabel = new Text("Tweets sur votre langage :");
         tweetsLabel.getStyleClass().add("title");
-        grid.add(tweetsLabel,0,4);
+        grid.add(tweetsLabel,0,currentRow);
         tweets = FXCollections.observableArrayList(welcome);
         tweetsView = new ListView<Tweet>(tweets);
+
         tweets.addListener((ListChangeListener<Tweet>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
@@ -86,10 +110,13 @@ public class TimelineView {
                 }
             }
         });
-        grid.add(tweetsView,0,5);
+        grid.add(tweetsView,0,currentRow++);
         stage.getScene().getStylesheets().add(
                 getClass().getResource("../Timeline.css").toExternalForm()
         );
+
+
+
     }
 
     /**
@@ -105,28 +132,46 @@ public class TimelineView {
         }
     }
 
+    public ArrayList<Button> getBuyableEventsButtons() {
+        ArrayList buttons = new ArrayList<HBox>();
+        ArrayList<Event> events = gameCtrl.getGame().getBuyableEvents();
+        for (Iterator<Event> I = events.iterator(); I.hasNext(); ) {
+            Event event = I.next();
+           Button btn = createButton(event.getName());
+           TimelineView self = this;
+            btn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    ThrowableEvent throwableEvent = event.getThrowable(gameCtrl.getGame());
+                    throwableEvent.throwEvent(gameCtrl,self);
+                }
+            });
+            buttons.add(btn);
+        }
+        return  buttons;
+    }
+
+
     public GridPane createGrid(){
         GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(20);
-        grid.setPadding(new Insets(10));
+        // space between elements
+        grid.setVgap(10);
+        grid.setPadding(new Insets(5));
         return grid;
     }
 
-    public HBox createButton(String label)    {
+    public Button createButton(String label)    {
         Button btn = new Button(label);
         btn.getStyleClass().add("button");
-        HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-        hbBtn.getChildren().add(btn);
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+
+       /* btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
 
 
             }
-        });
-        return hbBtn;
+        });*/
+        return btn;
     }
 
     public void tweet(String nom) {

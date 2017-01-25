@@ -109,7 +109,9 @@ public class GameController {
     public ThrowableEvent pickEvent(){
         int somme = 0;
         for (ThrowableEvent ev : game.getPossibleEvent()) {
-            somme += ev.probability;
+            // buyable evants shouldn't be thrown randomly
+            if(ev.event.isBuyable() == false)
+                somme += ev.probability;
         }
 
         Random rand = new Random();

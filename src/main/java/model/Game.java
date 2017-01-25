@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import controllers.ParadincRegionController;
 import map.ParadincRegion;
@@ -35,6 +36,15 @@ public class Game {
 
     public Integer getStars() {
         return this.stars;
+    }
+    public ArrayList<Event> getBuyableEvents(){
+        ArrayList<Event> buyableEvents = new ArrayList<Event>();
+        for (Iterator<Event> I = event.iterator(); I.hasNext(); ) {
+            Event event = I.next();
+            if(event.isBuyable())
+                buyableEvents.add(event);
+        }
+        return buyableEvents;
     }
 
     public void setStars(Integer stars) {
