@@ -143,7 +143,7 @@ public class TimelineView {
                 @Override
                 public void handle(ActionEvent e) {
                     ThrowableEvent throwableEvent = event.getThrowable(gameCtrl.getGame());
-                    throwableEvent.throwEvent(gameCtrl,self);
+                    gameCtrl.turnEvent.add(throwableEvent);
                 }
             });
             buttons.add(btn);

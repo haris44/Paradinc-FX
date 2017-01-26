@@ -24,12 +24,9 @@ public class GameFactory {
         event.add(new Bug("Lenteur de traitement", -10, -2, 0, new Pair<>(70, 1.0), new Pair<>(0, 0.0)));
         event.add(new Bug("Utilisation processeur intensive", -10, -2, 0, new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
 
-        // we generate a random int for the stars you will win are less predictable
-        Integer presLang = ThreadLocalRandom.current().nextInt(5,15);
-        Integer presUpdate = ThreadLocalRandom.current().nextInt(5,10);
 
-        event.add(new Conference("Conférence de présentation du langage",10,presLang,5 ));
-        event.add(new Conference("Présentation de mise à jour",5,presUpdate,5 ));
+        event.add(new Conference("Conférence de présentation du langage",10,15,5 ));
+        event.add(new Conference("Présentation de mise à jour",5,15,5 ));
 
         Timeline timeline = new Timeline();
         ParadincRegionController regionController = ParadincRegionFactory.createRegion();
