@@ -79,9 +79,10 @@ public class GameController {
             System.out.println("Vous avez perdu");
         }
     }
-    public int getStars(){
+    public Integer getStars(){
         return game.getStars();
     }
+
     private ArrayList<ThrowableEvent> PickedRandomEvent(){
 
         Random rand = new Random();
