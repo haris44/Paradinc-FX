@@ -2,6 +2,7 @@ package model.events;
 
 import javafx.util.Pair;
 import model.Game;
+import model.language.Attribute;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,6 @@ public abstract class Event {
 
 	int price;
 	String nom;
-	boolean buyable = false;
 	int lenghtStars;
 	int lenghtContamination;
 
@@ -22,9 +22,6 @@ public abstract class Event {
 		this.lenghtContamination = lenghtContamination;
 		this.lenghtStars = lenghtStars;
 		this.price = price;
-		if(price > 0 ){
-			this.buyable = true;
-		}
 
 	}
 
@@ -36,12 +33,35 @@ public abstract class Event {
 		return somme / list.size();
 	}
 	public int processAttribute(Pair<Integer, Double> EventProps, int GameProps){
-		return (int) (100 - Math.round(Math.abs(GameProps - EventProps.getKey()))* EventProps.getValue());
+			if((int) (100 - Math.round(Math.abs(GameProps - EventProps.getKey())) * EventProps.getValue()) > 0) {
+				return (int) (100 - Math.round(Math.abs(GameProps - EventProps.getKey())) * EventProps.getValue());
+			}
+			else{
+				return 0;
+			}
+
 	}
+
+	public int processAttribute(ArrayList<Attribute> props, Game game){
+		boolean isOkay = false;
+		for(Attribute prop : props) {
+			if (game.getLanguage().getAttributes().contains(prop)){
+				isOkay = true;
+			}
+		}
+		return isOkay ? 100 : 0;
+
+	}
+
+
 	public String getName(){
 	    return nom;
     }
 
-	public boolean isBuyable(){return  this.buyable;}
+	public boolean isBuyable(){return price > 0; }
 	public abstract ThrowableEvent getThrowable(Game game);
+
+	public int getPrice() {
+		return price;
+	}
 }

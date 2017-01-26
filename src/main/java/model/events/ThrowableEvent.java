@@ -45,6 +45,6 @@ public class ThrowableEvent {
 		this.event = event;
 		this.probability = probability;
 		this.region = region;
-
+		this.price = price;
 	}
 }

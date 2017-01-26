@@ -13,16 +13,14 @@ import model.language.Language;
 public class Game {
     protected Language language;
     protected Integer stars;
-    protected Timeline timeline;
     protected ArrayList<Event> event;
     protected ArrayList<ThrowableEvent> possibleEvent;
     protected ParadincRegionController regionController;
 
-    public Game(ParadincRegionController regionController, Language language, Integer stars, Timeline timeline, ArrayList<Event> event) {
+    public Game(ParadincRegionController regionController, Language language, Integer stars,  ArrayList<Event> event) {
         this.regionController = regionController;
         this.language = language;
         this.stars = stars;
-        this.timeline = timeline;
         this.event = event;
     }
 
@@ -49,14 +47,6 @@ public class Game {
 
     public void setStars(Integer stars) {
         this.stars = stars;
-    }
-
-    public Timeline getTimeline() {
-        return this.timeline;
-    }
-
-    public void setTimeline(Timeline timeline) {
-        this.timeline = timeline;
     }
 
 
