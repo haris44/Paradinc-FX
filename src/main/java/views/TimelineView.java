@@ -2,6 +2,8 @@ package views;
 
 import controllers.GameController;
 import factory.GameFactory;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -11,10 +13,13 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Game;
 import model.Timeline;
@@ -23,6 +28,7 @@ import model.events.Conference;
 import model.events.Event;
 import model.events.ThrowableEvent;
 import model.language.*;
+import utils.Triple;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,9 +47,12 @@ public class TimelineView {
     private Text globalInfection;
     private Text turnCounter;
     private Integer turnNumber = 0;
+    private Slider robustness;
+    private Slider facility;
     private ListView<Tweet> tweetsView;
     final private ObservableList<Tweet> tweets;
-
+    Text modalStarsCounter = new Text();
+    Label modalStarsLabel = new Label("Stars disponibles");
 
     public TimelineView(Stage stage, GameController controller){
 
@@ -78,18 +87,28 @@ public class TimelineView {
         globalInfectionLabel.getStyleClass().add("title");
         grid.add(globalInfectionLabel,0,currentRow);
         globalInfection = new Text("10 %");
-        grid.add(globalInfection,1,currentRow);
+
+        currentRow +=1;
+
+        grid.add(globalInfection,0,currentRow);
 
         currentRow+=1;
-                /* we add to the grid all events that we can throw */
+        /* we add to the grid all events that we can throw */
         Text throwableEventsLabel = new Text("Actions possibles");
-        throwableEventsLabel.getStyleClass().add("title");
+        Button eventsButton = createButton("Actions");
+        eventsButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                openModal(stage);
+            }
+        });
+        eventsButton.getStyleClass().add("title");
         grid.add(throwableEventsLabel,0,currentRow);
-        for (Iterator<Button> I = getBuyableEventsButtons().iterator(); I.hasNext(); ) {
-            Button btn = I.next();
-            grid.add(btn,0,currentRow);
-            currentRow +=1;
-        }
+
+        currentRow +=1;
+
+        grid.add(eventsButton,0,currentRow);
+
 
 
         currentRow +=1;
@@ -132,11 +151,84 @@ public class TimelineView {
         }
     }
 
+
+    public void openModal(Stage parent){
+        Stage modal = new Stage();
+        GridPane grid = new GridPane();
+        Integer currentRow = 0;
+        Scene modalScene = new Scene(grid,1366, 768);
+        modal.initOwner(parent);
+        modalStarsCounter.setText(gameCtrl.getStars().toString());
+        GridPane modalGrid = createGrid();
+        modal.setScene(modalScene);
+        grid.add(modalStarsLabel,0,currentRow);
+        currentRow+=1;
+        grid.add(modalStarsCounter,0,currentRow);
+        currentRow+=1;
+
+        Triple<Slider,Label,Label> robustness = createSlider("Robustesse du langage",0,100,gameCtrl.getLanguage().getRobustness());
+
+        grid.add(robustness.y,0,currentRow);
+        grid.add(robustness.x,1,currentRow);
+        grid.add(robustness.z,2,currentRow);
+
+        this.robustness = robustness.x;
+
+        Triple<Slider,Label,Label> facility = createSlider("Simplicité du langage",0,100,gameCtrl.getLanguage().getFacility());
+        currentRow+=1;
+
+        grid.add(facility.y,0,currentRow);
+        grid.add(facility.x,1,currentRow);
+        grid.add(facility.z,2,currentRow);
+        this.facility = facility.x;
+
+        currentRow+=1;
+        for (Iterator<Button> I = getBuyableEventsButtons().iterator(); I.hasNext(); ) {
+            Button btn = I.next();
+            grid.add(btn,0,currentRow);
+            currentRow +=1;
+        }
+
+        modal.initModality(Modality.APPLICATION_MODAL);
+        modal.showAndWait();
+    }
+
+
+    public Triple<Slider,Label,Label> createSlider(String labelText, int min, int max, Integer value){
+        Label label = new Label(labelText);
+        final Label labelValue = new Label(value.toString());
+        final Slider slider = new Slider(min,max,value);
+
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                Integer selectedStars = gameCtrl.getStars();
+                Integer value = newValue.intValue();
+                Integer gap = newValue.intValue()-oldValue.intValue();
+                Integer currentStars = selectedStars;
+                Integer nextStars = currentStars - gap;
+
+                if (nextStars>=10 && nextStars<=100) {
+                    labelValue.setText(value.toString());
+                    selectedStars = nextStars;
+
+                }
+                else{
+                    slider.setValue(oldValue.intValue());
+                    selectedStars = currentStars;
+                }
+                gameCtrl.setStars(selectedStars);
+                modalStarsCounter.setText(selectedStars.toString());
+            }
+        });
+        return new Triple<Slider,Label,Label>(slider,label,labelValue);
+    }
+
     public ArrayList<Button> getBuyableEventsButtons() {
         ArrayList buttons = new ArrayList<HBox>();
         ArrayList<Event> events = gameCtrl.getGame().getBuyableEvents();
         for (Iterator<Event> I = events.iterator(); I.hasNext(); ) {
-            Event event = I.next();
+           Event event = I.next();
            Button btn = createButton(event.getName());
            TimelineView self = this;
             btn.setOnAction(new EventHandler<ActionEvent>() {
