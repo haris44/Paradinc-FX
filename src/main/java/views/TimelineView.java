@@ -220,7 +220,7 @@ public class TimelineView {
         this.facility = facility.x;
 
         currentRow+=1;
-        for (Iterator<Button> I = getBuyableEventsButtons().iterator(); I.hasNext(); ) {
+        for (Iterator<Button> I = getBuyableEventsButtons(modal).iterator(); I.hasNext(); ) {
             Button btn = I.next();
             grid.add(btn,0,currentRow);
             currentRow +=1;
@@ -261,18 +261,20 @@ public class TimelineView {
         return new Triple<Slider,Label,Label>(slider,label,labelValue);
     }
 
-    public ArrayList<Button> getBuyableEventsButtons() {
+    public ArrayList<Button> getBuyableEventsButtons(Stage stage) {
         ArrayList buttons = new ArrayList<HBox>();
         ArrayList<Event> events = gameCtrl.getGame().getBuyableEvents();
         for (Iterator<Event> I = events.iterator(); I.hasNext(); ) {
            Event event = I.next();
-           Button btn = createButton(event.getName());
+           String label = new String("(-" + event.getPrice()  +  " stars)  " + event.getName() );
+           Button btn = createButton(label);
            TimelineView self = this;
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
                     ThrowableEvent throwableEvent = event.getThrowable(gameCtrl.getGame());
                     gameCtrl.turnEvent.add(throwableEvent);
+                    stage.close();
                 }
             });
             buttons.add(btn);
