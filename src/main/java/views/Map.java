@@ -42,14 +42,17 @@ public class Map {
         map.setTranslateY(WindowSize.TOP_BAR_Y);
 
         topBarPan = new StackPane();
-        topBarPan.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        topBarPan.setBackground(new Background(new BackgroundFill(Color.web("#3f3f4f"), CornerRadii.EMPTY, Insets.EMPTY)));
+        topBarPan.getStyleClass().add("title");
         topBarPan.setMinHeight(WindowSize.TOP_BAR_Y);
         topBarPan.setMaxHeight(WindowSize.TOP_BAR_Y);
         topBarPan.setMinWidth(WindowSize.TOP_BAR_X);
 
 
         tour = new Text();
-        tour.setText("tour n°" + compteur);
+        tour.setFill(Color.web("#F5F5F5"));
+        tour.setText("PARAD'INC ! tour n°" + compteur);
         topBarPan.getChildren().add(tour);
 
 
@@ -72,7 +75,7 @@ public class Map {
     public synchronized void notifyTour() {
         compteur = compteur + 1;
         topBarPan.getChildren().remove(tour);
-        tour.setText("tour n°" + compteur);
+        tour.setText("PARAD'INC ! tour n°" + compteur);
         topBarPan.getChildren().add(tour);
     }
 

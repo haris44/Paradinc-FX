@@ -5,6 +5,9 @@
     -fx-background-image: url("grid.png");
     -fx-background-repeat: repeat;
 }
+.padding{
+    -fx-padding: 15px;
+}
 Label{
     -fx-text-fill: #f5f5f5;
 }
@@ -23,6 +26,7 @@ ChoiceBox> Label{
     -fx-font-size: 12px;
     -fx-cursor: hand;
     -fx-border-radius: 0;
+    -fx-margin: 15px;
 }
 .button:pressed{
     -fx-background-color:#E53935;

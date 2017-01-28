@@ -12,15 +12,13 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.Game;
 import model.Timeline;
 import model.actions.Tweet;
@@ -34,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Observable;
+
+import static com.sun.org.apache.xml.internal.serializer.utils.Utils.messages;
 
 /**
  * Created by nathan on 18/01/17.
@@ -59,7 +59,9 @@ public class TimelineView {
         this.gameCtrl = controller;
         this.stage = stage;
         Integer currentRow = 0;
-
+        grid.getStylesheets().add(
+                getClass().getResource("../Form.css").toExternalForm()
+        );
 
         view = (StackPane) stage.getScene().getRoot().getChildrenUnmodifiable().get(0);
         view.getStylesheets().add("Timeline.css");
@@ -120,6 +122,30 @@ public class TimelineView {
         grid.add(tweetsLabel,0,currentRow);
         tweets = FXCollections.observableArrayList(welcome);
         tweetsView = new ListView<Tweet>(tweets);
+        /*
+        we need to set the text wrap of list  view cells
+         */
+        tweetsView.setCellFactory(new Callback<ListView<Tweet>, ListCell<Tweet>>() {
+            @Override
+            public ListCell<Tweet> call(ListView<Tweet> list) {
+                final ListCell cell = new ListCell() {
+                    private Text text;
+
+                    @Override
+                    public void updateItem(Object item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            text = new Text(item.toString());
+                            text.setWrappingWidth(300);
+                            setGraphic(text);
+                        }
+                    }
+                };
+
+                return cell;
+            }
+        });
+        tweetsView.setMaxWidth(350);
 
         tweets.addListener((ListChangeListener<Tweet>) change -> {
             while (change.next()) {
@@ -154,7 +180,18 @@ public class TimelineView {
 
     public void openModal(Stage parent){
         Stage modal = new Stage();
+
+        modalStarsCounter.getStyleClass().add("title");
+
         GridPane grid = new GridPane();
+        grid.getStylesheets().add(
+                getClass().getResource("../Form.css").toExternalForm()
+        );
+        grid.getStyleClass().add("grid");
+        grid.getStyleClass().add("padding");
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
         Integer currentRow = 0;
         Scene modalScene = new Scene(grid,1366, 768);
         modal.initOwner(parent);
@@ -254,6 +291,8 @@ public class TimelineView {
 
     public Button createButton(String label)    {
         Button btn = new Button(label);
+        btn.setMaxWidth(300);
+        btn.setWrapText(true);
         btn.getStyleClass().add("button");
 
        /* btn.setOnAction(new EventHandler<ActionEvent>() {

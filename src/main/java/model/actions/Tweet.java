@@ -30,7 +30,7 @@ public class Tweet {
     }
     public String toString(){
         SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "dd/MM/yyyy hh:mm");
+                "dd/MM hh");
         return dateFormat.format(date)
 
                 +" : "
