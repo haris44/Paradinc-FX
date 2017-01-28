@@ -171,10 +171,6 @@ public class TimelineView {
         turnNumber += 1;
         turnCounter.setText(turnNumber.toString());
         starsCounter.setText(gameCtrl.getGame().getStars().toString());
-        if(turnNumber%10 == 0){
-            Tweet tenTurns = new Tweet(new Date(),"Le langage a passé 10 tours de plus !");
-            this.tweets.add(tenTurns);
-        }
     }
 
 
@@ -308,6 +304,6 @@ public class TimelineView {
     }
 
     public void tweet(String nom) {
-        // NOT IMPLEMENTED
+        tweets.add(0,new Tweet(new Date(),nom));
     }
 }
