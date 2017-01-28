@@ -277,7 +277,7 @@ public class TimelineView {
             });
             buttons.add(btn);
         }
-        return  buttons;
+        return buttons;
     }
 
 

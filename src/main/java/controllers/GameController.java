@@ -34,6 +34,7 @@ public class GameController {
     public Game getGame(){
         return this.game;
     }
+
     public void startGame(){
 
         mapViews = new Map(stage, this);
@@ -85,13 +86,13 @@ public class GameController {
     private ArrayList<ThrowableEvent> PickedRandomEvent(){
 
         Random rand = new Random();
-        ThrowableEvent currEvent = null;
 
         int nombrePickEvent = rand.nextInt(3); // nombre d'event qui vont être picked
 
         game.setPossibleEvent(new ArrayList<ThrowableEvent>());
         for (Event ev :game.getEvent()) {
-           game.getPossibleEvent().add(ev.getThrowable(game));
+            if(ev.getPrice() < 7)
+                game.getPossibleEvent().add(ev.getThrowable(game));
         }
 
         ArrayList<ThrowableEvent> pickedEvents = new ArrayList<ThrowableEvent>();
@@ -99,6 +100,8 @@ public class GameController {
         for(int i = 0; i < nombrePickEvent; i++)
         {
             ThrowableEvent picked = pickEvent();
+            // picked event is free ! :p
+            picked.price = 0;
             System.out.println(picked);
             pickedEvents.add(picked);
 
@@ -110,9 +113,8 @@ public class GameController {
     public ThrowableEvent pickEvent(){
         int somme = 0;
         for (ThrowableEvent ev : game.getPossibleEvent()) {
-            // buyable evants shouldn't be thrown randomly
-            if(ev.event.isBuyable() == false)
-                somme += ev.probability;
+            somme += ev.probability;
+
         }
 
         Random rand = new Random();
@@ -127,6 +129,7 @@ public class GameController {
             i += 1;
         }
 
+        game.getPossibleEvent().remove(currEvent);
         return currEvent;
     }
 
