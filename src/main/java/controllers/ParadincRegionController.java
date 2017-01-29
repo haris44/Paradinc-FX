@@ -18,6 +18,13 @@ public class ParadincRegionController {
 		listRegions = new ArrayList<>();
 	}
 
+	public int getGlobalContamination(){
+		int conta = 0;
+		for (ParadincRegion region : listRegions) {
+			conta += region.getContamination();
+		}
+		return conta;
+	}
 	public ParadincRegion pickRegions(){
 		int somme = 0;
 		for (ParadincRegion ev : listRegions) {

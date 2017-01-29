@@ -39,8 +39,8 @@ public class GameFactory {
         Integer presLang = ThreadLocalRandom.current().nextInt(5,15);
         Integer presUpdate = ThreadLocalRandom.current().nextInt(5,10);
 
-        event.add(new Conference("Conférence de présentation du langage",10,15,5 ));
-        event.add(new Conference("Présentation de mise à jour",5,15,5 ));
+        event.add(new Conference("Conférence de présentation du langage", 50, 40, 10, new Pair<>(30, 2.0)));
+        event.add(new Conference("Présentation de mise à jour", 60, 20, 20, new Pair<>(70, 2.0)));
 
         ParadincRegionController regionController = ParadincRegionFactory.createRegion();
 

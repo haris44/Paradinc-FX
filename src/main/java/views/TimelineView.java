@@ -1,7 +1,6 @@
 package views;
 
 import controllers.GameController;
-import factory.GameFactory;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -19,21 +18,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import model.Game;
-import model.Timeline;
 import model.actions.Tweet;
-import model.events.Conference;
 import model.events.Event;
 import model.events.ThrowableEvent;
-import model.language.*;
 import utils.Triple;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.Observable;
-
-import static com.sun.org.apache.xml.internal.serializer.utils.Utils.messages;
 
 /**
  * Created by nathan on 18/01/17.

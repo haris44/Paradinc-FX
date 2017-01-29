@@ -18,26 +18,37 @@ import static org.junit.Assert.*;
  */
 public class IncompatibilityTest {
 
-
 	ThrowableEvent thrEv;
-
+	Game game;
 	@Before
 	public void setUp() {
 		Language lang = new Language("test", 100, 0);
 		lang.setAttributes(new ArrayList<Attribute>(){{ add(0, Platform.fromPlatformType(PlatformType.Linux));}});
 		Incompatibility inc = new Incompatibility("test", 0, 0, 0, new ArrayList<Attribute>(){{ add(0, Platform.fromPlatformType(PlatformType.Linux));}});
-		Game game = GameFactory.createGame(lang, 20);
+		game = GameFactory.createGame(lang, 20);
 		thrEv = inc.getThrowable(game);
 	}
 
 	@Test
-	public void testCalculer() throws Exception {
+	public void ProbabilityWhenSame() throws Exception {
 		assertEquals(thrEv.probability, 100);
 	}
 
 	@Test
-	public void testNotCalculer() throws Exception {
+	public void ProbabilityWhenNotSame() throws Exception {
+		Language lang = game.getLanguage();
+		lang.setAttributes(new ArrayList<Attribute>(){{ add(Platform.fromPlatformType(PlatformType.Unix));}});
+		game.setLanguage(lang);
+		Incompatibility inc = new Incompatibility("test", 0, 0, 0, new ArrayList<Attribute>(){{ add(0, Platform.fromPlatformType(PlatformType.Linux));}});
+		thrEv = inc.getThrowable(game);
+		assertEquals(thrEv.probability, 0);
+	}
+
+	@Test
+	public void ProbabilityNotEquals() throws Exception {
 		assertNotEquals(thrEv.probability, 90);
 	}
+
+
 
 }
