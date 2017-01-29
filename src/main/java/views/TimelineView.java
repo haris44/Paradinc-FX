@@ -228,7 +228,7 @@ public class TimelineView {
                 Integer newFacility = ((int) facility.x.getValue());
                 gameCtrl.getGame().getLanguage().setFacility(newFacility);
                 gameCtrl.getGame().getLanguage().setRobustness(newRobustness);
-                modal.close();
+                closeModal(modal);
             }
         });
         grid.add(validate, 0,currentRow);

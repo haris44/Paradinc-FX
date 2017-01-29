@@ -6,7 +6,6 @@ import model.language.Attribute;
 import model.language.Language;
 import model.language.Platform;
 import model.language.PlatformType;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
