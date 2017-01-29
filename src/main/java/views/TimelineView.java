@@ -136,7 +136,7 @@ public class TimelineView {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
                             text = new Text(item.toString());
-                            text.setWrappingWidth(300);
+                            text.setWrappingWidth(200);
                             setGraphic(text);
                         }
                     }
@@ -145,7 +145,7 @@ public class TimelineView {
                 return cell;
             }
         });
-        tweetsView.setMaxWidth(350);
+        tweetsView.setMaxWidth(240);
 
         tweets.addListener((ListChangeListener<Tweet>) change -> {
             while (change.next()) {
@@ -216,6 +216,20 @@ public class TimelineView {
         this.facility = facility.x;
 
         currentRow+=1;
+
+        Button validate = createButton("Valider les modifications du langage");
+        validate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                Integer newRobustness = ((int) robustness.x.getValue());
+                Integer newFacility = ((int) facility.x.getValue());
+                gameCtrl.getGame().getLanguage().setFacility(newFacility);
+                gameCtrl.getGame().getLanguage().setRobustness(newRobustness);
+                modal.close();
+            }
+        });
+        grid.add(validate, 0,currentRow);
+        currentRow +=2;
         for (Iterator<Button> I = getBuyableEventsButtons(modal).iterator(); I.hasNext(); ) {
             Button btn = I.next();
             grid.add(btn,0,currentRow);
@@ -251,7 +265,7 @@ public class TimelineView {
                     selectedStars = currentStars;
                 }
                 gameCtrl.setStars(selectedStars);
-                modalStarsCounter.setText(selectedStars.toString());
+                modalStarsCounter.setText("Stars restantes : " + selectedStars.toString());
             }
         });
         return new Triple<Slider,Label,Label>(slider,label,labelValue);
