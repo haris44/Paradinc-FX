@@ -11,11 +11,6 @@ import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.ArrayList;
 
-
-/**
- * Created by Nathan on 09/01/2017.
- */
-
 public class Turn {
     // specifies the length (in seconds) of a turn
     private Integer length;
