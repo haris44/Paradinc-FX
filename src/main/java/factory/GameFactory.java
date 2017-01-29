@@ -35,9 +35,6 @@ public class GameFactory {
         event.add(new Bug("Lenteur de traitement", -10, -2, 0, allPlatform, new Pair<>(70, 1.0), new Pair<>(0, 0.0)));
         event.add(new Bug("Utilisation processeur intensive", -10, -2, 0, allPlatform, new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
 
-        // Please, refactor with the xslx. Do not use Random
-        Integer presLang = ThreadLocalRandom.current().nextInt(5,15);
-        Integer presUpdate = ThreadLocalRandom.current().nextInt(5,10);
 
         event.add(new Conference("Conférence de présentation du langage", 50, 40, 10, new Pair<>(30, 2.0)));
         event.add(new Conference("Présentation de mise à jour", 60, 20, 20, new Pair<>(70, 2.0)));

@@ -6,26 +6,24 @@ import model.Game;
 
 import java.util.ArrayList;
 
-/**
- * Created by Alex on 05/12/2016.
- */
 
-// Please check Bug to create the conference event
-public class Conference extends Event {
+public class Tweet extends Event {
 
-	Pair<Integer, Double>  contamination;
+	Pair<Integer, Double> contamination;
+	Pair<Integer, Double> facility;
 
-	public Conference(String nom, int price, int lenghtStars, int lenghtContamination, Pair<Integer, Double> contamination){
+	public Tweet(String nom, int price, int lenghtStars, int lenghtContamination, Pair<Integer, Double> contamination, Pair<Integer, Double> facility){
 		super(nom, price, lenghtStars, lenghtContamination);
 		this.contamination = contamination;
+		this.facility = facility;
 	}
 
 	@Override
 	public ThrowableEvent getThrowable(Game game) {
 		ArrayList<Integer> proba = new ArrayList<>();
 		proba.add(processAttribute(contamination, game.getRegionController().getGlobalContamination()));
+		proba.add(processAttribute(facility, game.getLanguage().getFacility()));
 		ParadincRegion regions = game.getRegionController().pickRegions();
 		return new ThrowableEvent(this, 1, this.getMoyenne(proba), price, regions);
 	}
-
 }
