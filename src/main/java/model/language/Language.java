@@ -9,17 +9,13 @@ public class Language {
     public String name;
     public int robustness;
     public int facility;
-    public int area;
-    public int startArea;
     private ArrayList<Attribute> attributes;
 
 
-    public Language(String name, int robustness, int facility, int area, int startArea){
+    public Language(String name, int robustness, int facility){
         this.name = name;
         this.robustness = robustness;
         this.facility = facility;
-        this.area = area;
-        this.startArea = startArea;
         this.attributes = new ArrayList<Attribute>();
     }
 
@@ -32,7 +28,7 @@ public class Language {
     }
 
     public String toString(){
-        return name.toString() + " " + robustness + " " + facility + " " + area + " " + startArea + " " +this.attributes.toString();
+        return name.toString() + " " + robustness + " " + facility + " " +this.attributes.toString();
     }
 
 
@@ -60,19 +56,4 @@ public class Language {
         this.facility = facility;
     }
 
-    public int getArea() {
-        return area;
-    }
-
-    public void setArea(int area) {
-        this.area = area;
-    }
-
-    public int getStartArea() {
-        return startArea;
-    }
-
-    public void setStartArea(int startArea) {
-        this.startArea = startArea;
-    }
 }

@@ -193,7 +193,7 @@ public class Form {
                     }
                     ParadygmType para = ParadygmType.valueOf(paradygmChoice.getValue().toString());
                     attr.add(Paradygm.fromParadygmeType(para));
-                    Language lang = new Language(name,robs,faci,0,0);
+                    Language lang = new Language(name,robs,faci);
                     lang.setAttributes(attr);
                     System.out.println(lang.toString());
 

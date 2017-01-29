@@ -45,8 +45,10 @@ public abstract class Event {
 		boolean isOkay = false;
 		ArrayList<Attribute> langProps = game.getLanguage().getAttributes();
 		for(Attribute prop : props) {
-			if (game.getLanguage().getAttributes().contains(prop) && type.isInstance(langProps.get(langProps.lastIndexOf(props)))){
-				isOkay = true;
+			for(Attribute gameAttr : langProps){
+				if(prop.getPlaformType().equals(gameAttr.getPlaformType()) && type.isInstance(gameAttr.getPlaformType())){
+					isOkay = true;
+				}
 			}
 		}
 		return isOkay ? 100 : 0;

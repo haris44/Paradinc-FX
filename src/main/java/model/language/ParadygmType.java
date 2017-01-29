@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 /**
  * Created by Nathan on 07/12/2016.
  */
-public enum ParadygmType {
+public enum ParadygmType implements AttributeType {
     Fonctionel,
     Object,
     Imperatif;

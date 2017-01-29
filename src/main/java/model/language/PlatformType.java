@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 /**
  * Created by Nathan on 08/12/2016.
  */
-public enum PlatformType {
+public enum PlatformType implements AttributeType{
     Linux,
     Unix,
     Windows;
