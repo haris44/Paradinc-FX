@@ -175,6 +175,9 @@ public class TimelineView {
 
 
     public void openModal(Stage parent){
+
+        gameCtrl.pauseTimer();
+
         Stage modal = new Stage();
 
         modalStarsCounter.getStyleClass().add("title");
@@ -221,6 +224,15 @@ public class TimelineView {
             grid.add(btn,0,currentRow);
             currentRow +=1;
         }
+
+        Button closeModalBtn = new Button("Retour au jeu ! ");
+        closeModalBtn.setMaxWidth(300);
+        closeModalBtn.setWrapText(true);
+        closeModalBtn.getStyleClass().add("button");
+
+        closeModalBtn.setOnAction(e -> closeModal(modal));
+
+        grid.add(closeModalBtn, 0, currentRow + 1 );
 
         modal.initModality(Modality.APPLICATION_MODAL);
         modal.showAndWait();
@@ -270,7 +282,7 @@ public class TimelineView {
                 public void handle(ActionEvent e) {
                     ThrowableEvent throwableEvent = event.getThrowable(gameCtrl.getGame());
                     gameCtrl.turnEvent.add(throwableEvent);
-                    stage.close();
+                    closeModal(stage);
                 }
             });
             buttons.add(btn);
@@ -278,6 +290,10 @@ public class TimelineView {
         return buttons;
     }
 
+    private void closeModal(Stage stage){
+        gameCtrl.resumeTimer();
+        stage.close();
+    }
 
     public GridPane createGrid(){
         GridPane grid = new GridPane();

@@ -134,5 +134,11 @@ public class GameController {
     }
 
 
+	public void pauseTimer() {
+		t.stop();
+	}
 
+	public void resumeTimer() {
+		t.run(this);
+	}
 }

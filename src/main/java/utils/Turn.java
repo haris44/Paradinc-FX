@@ -20,18 +20,21 @@ public class Turn {
     // specifies the length (in seconds) of a turn
     private Integer length;
     Timer timer;
-    private ArrayList<Event> nextActions = new ArrayList<Event>();
-    private ArrayList<Event> pastActions = new ArrayList<Event>();
+    private GameController gamectrl;
+
 
     public Turn(Integer length) {
         this.length = length;
     }
 
     public void run(GameController gamectrl) {
-        Integer delay = length == null || length < 1 ? 10 : length;
-         timer = new java.util.Timer();
+		this.timer = new java.util.Timer();
+        this.gamectrl = gamectrl;
+        this.timer.schedule(getTimerTask(), 1000, length * 1000);
+    }
 
-        timer.schedule(new TimerTask() {
+    private TimerTask getTimerTask(){
+        return new TimerTask() {
             public void run() {
                 Platform.runLater(new Runnable() {
                     public void run() {
@@ -42,23 +45,10 @@ public class Turn {
                     }
                 });
             }
-        }, 1000, length * 1000);
+        };
     }
-
     public void stop(){
         timer.cancel();
     }
 
-    public ArrayList<Event> addAction(Event action) {
-        nextActions.add(action);
-        return nextActions;
-    }
-
-    public ArrayList<Event> getNextActions() {
-        return nextActions;
-    }
-
-    public ArrayList<Event> getPastActions() {
-        return pastActions;
-    }
 }
