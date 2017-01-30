@@ -197,15 +197,16 @@ public class TimelineView {
         grid.add(modalStarsCounter,0,currentRow);
         currentRow+=1;
 
-        Triple<Slider,Label,Label> robustness = createSlider("Robustesse du langage",0,100,gameCtrl.getLanguage().getRobustness());
+        Integer minRob = gameCtrl.getLanguage().robustness;
+        Triple<Slider,Label,Label> robustness = createSlider("Robustesse du langage",minRob,100,gameCtrl.getLanguage().getRobustness());
 
         grid.add(robustness.y,0,currentRow);
         grid.add(robustness.x,1,currentRow);
         grid.add(robustness.z,2,currentRow);
 
         this.robustness = robustness.x;
-
-        Triple<Slider,Label,Label> facility = createSlider("Simplicité du langage",0,100,gameCtrl.getLanguage().getFacility());
+        Integer minFac = gameCtrl.getLanguage().facility;
+        Triple<Slider,Label,Label> facility = createSlider("Simplicité du langage",minFac,100,gameCtrl.getLanguage().getFacility());
         currentRow+=1;
 
         grid.add(facility.y,0,currentRow);
@@ -227,6 +228,7 @@ public class TimelineView {
             }
         });
         grid.add(validate, 0,currentRow);
+
         currentRow +=2;
         for (Iterator<Button> I = getBuyableEventsButtons(modal).iterator(); I.hasNext(); ) {
             Button btn = I.next();
@@ -253,26 +255,30 @@ public class TimelineView {
         final Label labelValue = new Label(value.toString());
         final Slider slider = new Slider(min,max,value);
 
+
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                Integer selectedStars = gameCtrl.getStars();
-                Integer value = newValue.intValue();
-                Integer gap = newValue.intValue()-oldValue.intValue();
-                Integer currentStars = selectedStars;
-                Integer nextStars = currentStars - gap;
 
-                if (nextStars>=10 && nextStars<=100) {
-                    labelValue.setText(value.toString());
-                    selectedStars = nextStars;
+                    Integer selectedStars = gameCtrl.getStars();
+                    Integer value = newValue.intValue();
+                    Integer gap = newValue.intValue() - oldValue.intValue();
+                    Integer currentStars = selectedStars;
+                    Integer nextStars = currentStars - gap;
 
-                }
-                else{
-                    slider.setValue(oldValue.intValue());
-                    selectedStars = currentStars;
-                }
-                gameCtrl.setStars(selectedStars);
-                modalStarsCounter.setText("Stars restantes : " + selectedStars.toString());
+
+                    if (nextStars >= 10 && nextStars <= 100) {
+                        labelValue.setText(value.toString());
+                        selectedStars = nextStars;
+
+                    } else {
+                        slider.setValue(oldValue.intValue());
+                        selectedStars = currentStars;
+                    }
+                    gameCtrl.setStars(selectedStars);
+                    modalStarsCounter.setText("Stars restantes : " + selectedStars.toString());
+
+
             }
         });
         return new Triple<Slider,Label,Label>(slider,label,labelValue);
@@ -318,13 +324,6 @@ public class TimelineView {
         btn.setWrapText(true);
         btn.getStyleClass().add("button");
 
-       /* btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-
-
-            }
-        });*/
         return btn;
     }
 
