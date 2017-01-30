@@ -331,8 +331,9 @@ public class TimelineView {
 
 
         ArrayList<Event> events = gameCtrl.getGame().getBuyableEvents();
-
-
+        Text error = new Text("");
+        grid.add(error, 2,currentRow);
+        currentRow++;
         grid.add(new Text("Conferences"),0,currentRow);
         grid.add(new Text("Tweets"),1,currentRow);
         grid.add(new Text("Comunautées"),2,currentRow);
@@ -353,13 +354,18 @@ public class TimelineView {
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
-                    ThrowableEvent throwableEvent = event.getThrowable(gameCtrl.getGame());
-                    throwableEvent.setRegion(cbRegions.getValue());
-                    gameCtrl.turnEvent.add(throwableEvent);
-                    closeModal(stage);
+                    if(gameCtrl.getStars()-event.getPrice() > 0){
+                        ThrowableEvent throwableEvent = event.getThrowable(gameCtrl.getGame());
+                        throwableEvent.setRegion(cbRegions.getValue());
+                        gameCtrl.turnEvent.add(throwableEvent);
+                        closeModal(stage);
+                    }
+                    else{
+                        error.setText("Pas assez de stars disponibles");
+                    }
+
                 }
             });
-            System.out.println(event.getClass());
             if(Conference.class.isInstance(event)){
                 btn.getStyleClass().add("conference");
                 grid.add(btn,0,row1);
