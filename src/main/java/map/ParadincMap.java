@@ -33,7 +33,7 @@ public class ParadincMap {
 
         this.africa = new CountryRegion("AFRICA",DZ,AO,BH,
                 BJ,BW,BF,BI,CM,CV,CF,TD,KM,CD,CG,DJ,GQ,ER,FK,FO,
-                GA,GM,GH,GW,IQ,CI,JO,KE,KV,KW,
+                GA,GM,GH,GW,IQ,CI,KE,KW,
                 LB,LS,LR,LY,MG,MW,ML,MR,MU,YT,MA,MZ,NA,NE,NG,
                 OM,PS,QA,RW,SM,ST,SA,SN,SL,SO,ZA,SD,
                 SZ,SY,TZ,TG,TN,UG,AE,EH,YE,ZM,ZW,EG,GN,SS,ET);
@@ -41,7 +41,7 @@ public class ParadincMap {
 
         this.world = WorldBuilder.create()
                 .resolution(World.Resolution.HI_RES)
-                .selectionEnabled(true)
+                .selectionEnabled(false)
                 .build();
     }
 
