@@ -227,16 +227,17 @@ public class TimelineView {
     public void loose(){
         GridPane grid = clear();
         grid.getStyleClass().add("loose");
-
+        String cause = tweetsView.getItems().get(0).toString();
         grid.add(new Text("C'est perdu !"),3,3);
-
+        grid.add(new Text("Cause du décès : \n" + cause + " a ruiné votre stock de stars"),3,4);
     }
 
     public GridPane clear(){
         GridPane root = new GridPane();
-        root.setHgap(1);
         root.setVgap(1);
-        grid.getStylesheets().add(
+        root.setHgap(1);
+        root.setAlignment(Pos.CENTER);
+        root.getStylesheets().add(
                 getClass().getResource("../Form.css").toExternalForm()
         );
 
@@ -360,7 +361,7 @@ public class TimelineView {
                         Integer nextStars = currentStars - gap;
 
 
-                        if (nextStars >= 10 && nextStars <= 100) {
+                        if (nextStars >= 1 && nextStars <= 100) {
                             labelValue.setText(value.toString());
                             selectedStars = nextStars;
 
@@ -469,7 +470,6 @@ public class TimelineView {
         grid.setVgap(1);
         grid.setHgap(1);
         grid.setAlignment(Pos.CENTER);
-
         return grid;
     }
 

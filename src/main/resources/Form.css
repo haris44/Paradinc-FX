@@ -90,3 +90,11 @@ ChoiceBox> Label{
     -fx-background-image: url("paradinc.png");
     -fx-background-repeat: no-repeat;
 }
+.loose{
+    -fx-text-fill: #E53935;
+    -fx-font-weight: bold;
+}
+.win{
+    -fx-text-fill: #8BC34A;
+    -fx-font-weight: bold;
+}
