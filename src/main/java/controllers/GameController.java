@@ -18,7 +18,7 @@ public class GameController {
     public final int TIME_TURN = 10;
     public final int STARS_TURN = 10;
     public final int MAX_RANDOM_EVENT = 2;
-    public final int MAX_PRICE_RANDOM_EVENT = 10;
+    public final int MAX_PRICE_RANDOM_EVENT = 21;
 
     Game game;
     Stage stage;
@@ -70,7 +70,7 @@ public class GameController {
             game.setStars(stars);
         } else {
             game.setStars(0);
-          this.stopGame(false);
+            this.stopGame(false);
         }
     }
 
