@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Conference extends Event {
 
-	Pair<Integer, Double>  contamination;
+	Pair<Integer, Double> contamination;
 	Pair<Integer, Double> facility;
 	Pair<Integer, Double> robustness;
 
