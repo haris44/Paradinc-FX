@@ -63,7 +63,12 @@ public class GameFactory {
         event.add(new Tweet("Des tweets remettent en cause votre langage",0,-5,-4, new Pair<>(0,3.0), new Pair<>(10,3.0),PlatformArray.getAllPlatform()));
         event.add(new Tweet("Des utilisateurs créer un compte parodique pour votre langage",0,-6,-6,new Pair<>(15,6.0),new Pair<>(0,1.0),PlatformArray.getAllPlatform()));
 
-        event.add(new Community("La NASA perd le contrôle d'un rover martien suite à un bug dans votre langage",0,-40,40, new Pair<>(0,0.0), new Pair<>(80,5.0),PlatformArray.getAllPlatform()));
+        event.add(new Community("Talks au Humans Talk's",0,5,5, new Pair<>(35,5.0), new Pair<>(55,3.0),PlatformArray.getAllPlatform()));
+        event.add(new Community("Les sysadmins utilisent votre langage",0,15,15, new Pair<>(70,5.0), new Pair<>(10,1),PlatformArray.getAllPlatform()));
+        event.add(new Community("Google participe au développement de votre lanage",0,25,35, new Pair<>(90,10.0), new Pair<>(35,2.0),PlatformArray.getAllPlatform()));
+        event.add(new Community("La communauté hispter codent avec votre lanage",0,5,3, new Pair<>(5,5.0), new Pair<>(10,5.0),PlatformArray.getAllPlatform()));
+        event.add(new Community("Les vieux informaticiens d'intéressent à votre langage",0,10,3, new Pair<>(10,4.0), new Pair<>(75,6.0),PlatformArray.getAllPlatform()));
+        event.add(new Community("Publication d'un audite de sécurité désastraux",0,-30,-25, new Pair<>(0,5.0), new Pair<>(1,10.0),PlatformArray.getAllPlatform()));
 
 
         ParadincRegionController regionController = ParadincRegionFactory.createRegion();
