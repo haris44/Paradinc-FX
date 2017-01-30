@@ -249,6 +249,7 @@ public class TimelineView {
 
         ArrayList<ParadincRegion> regions = gameCtrl.getGame().getRegionController().getListRegions();
         cbRegions = new ChoiceBox(FXCollections.observableArrayList(regions));
+        cbRegions.getSelectionModel().selectFirst();
         grid.add(cbRegions,1,currentRow);
 
         currentRow+=1;
