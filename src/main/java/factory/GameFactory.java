@@ -49,8 +49,7 @@ public class GameFactory {
         event.add(new Conference("Conférence dans une grande salle", 70, -20, -10, new Pair<>(80, 5.0), new Pair<>(80, 5.0), new Pair<>(80, 2.0)));
         event.add(new Conference("Conférence qui critique la facilité", 0, -70, -50, new Pair<>(80, 7.0), new Pair<>(10, 7.0), new Pair<>(40, 2.0)));
         event.add(new Conference("Conférence qui critique la fiabilité", 0, -70, -50, new Pair<>(10, 7.0), new Pair<>(80, 7.0), new Pair<>(40, 2.0)));
-
-
+        
 
         ParadincRegionController regionController = ParadincRegionFactory.createRegion();
 
