@@ -22,14 +22,28 @@ public class GameFactory {
     public static Game createGame(Language language, Integer stars, String region){
         ArrayList<Event> event = new ArrayList<>();
 
-        event.add(new Bug("Out Of Memory", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(20, 1.0), new Pair<>(0, 0.0)));
-        event.add(new Bug("NullPointerException", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(10, 1.0), new Pair<>(0, 0.0)));
-        event.add(new Bug("Dépendance Deprecated", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(48, 2.0), new Pair<>(0, 0.0)));
-        event.add(new Bug("Array Out of Bound", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(10, 1.0), new Pair<>(0, 0.0)));
-        event.add(new Bug("Lenteur de traitement", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(70, 1.0), new Pair<>(0, 0.0)));
-        event.add(new Bug("Utilisation processeur intensive", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
+        event.add(new Bug("Out Of Memory", 0, -10, -2, PlatformArray.getAllPlatform(), new Pair<>(20, 1.0), new Pair<>(0, 0.0)));
+        event.add(new Bug("NullPointerException", 0, -10, -2, PlatformArray.getAllPlatform(), new Pair<>(10, 1.0), new Pair<>(0, 0.0)));
+        event.add(new Bug("Dépendance Deprecated", 0, -10, -2,PlatformArray.getAllPlatform(), new Pair<>(48, 2.0), new Pair<>(0, 0.0)));
+        event.add(new Bug("Array Out of Bound", 0, -10, -2, PlatformArray.getAllPlatform(), new Pair<>(10, 1.0), new Pair<>(0, 0.0)));
+        event.add(new Bug("Lenteur de traitement", 0, -10, -2, PlatformArray.getAllPlatform(), new Pair<>(70, 1.0), new Pair<>(0, 0.0)));
+        event.add(new Bug("Utilisation processeur intensive", 0, -10, -2, PlatformArray.getAllPlatform(), new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
 
-        event.add(new NewsPaper("Utilisation processeur intensive", -10, -2, 0,  new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
+        event.add(new NewsPaper("Utilisation processeur intensive", -10, -2, 0, new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
+
+
+        event.add(new Incompatibility("Mise a jour du Kernel", 0, -20, -10, PlatformArray.getLinuxPlatform(), new Pair<>(30, 2.0)));
+        event.add(new Incompatibility("Mise a jour de Windows", 0, -20, -10, PlatformArray.getWindowsPlateform(), new Pair<>(30, 2.0)));
+        event.add(new Incompatibility("Mise a jour d'OSX", 0, -20, -10, PlatformArray.getUnixPlateform(), new Pair<>(30, 2.0)));
+        event.add(new Incompatibility("Mise a jour de sécurité", 0, -20, -10, PlatformArray.getAllPlatform(), new Pair<>(50, 3.0)));
+
+        event.add(new Conference("Présentation du language", 0, -20, -10, new Pair<>(20, 5.0), new Pair<>(10, 5.0), new Pair<>(10, 3.0)));
+        event.add(new Conference("Présenter d'une MAJ", 0, -20, -10, new Pair<>(30, 3.0), new Pair<>(20, 10.0), new Pair<>(30, 3.0)));
+        event.add(new Conference("Conférence dans une petite salle", 0, -20, -10, new Pair<>(20, 5.0), new Pair<>(20, 5.0), new Pair<>(15, 2.0)));
+        event.add(new Conference("Conférence dans une moyenne salle", 0, -20, -10, new Pair<>(50, 5.0), new Pair<>(50, 3.0), new Pair<>(50, 2.0)));
+        event.add(new Conference("Conférence dans une grande salle", 0, -20, -10, new Pair<>(80, 5.0), new Pair<>(80, 5.0), new Pair<>(80, 2.0)));
+        event.add(new Conference("Conférence qui critique la facilité", 0, -70, -50, new Pair<>(80, 7.0), new Pair<>(10, 7.0), new Pair<>(40, 2.0)));
+        event.add(new Conference("Conférence qui critique la fiabilité", 0, -70, -50, new Pair<>(10, 7.0), new Pair<>(80, 7.0), new Pair<>(40, 2.0)));
 
 
 
