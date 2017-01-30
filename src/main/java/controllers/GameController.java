@@ -56,7 +56,9 @@ public class GameController {
         ArrayList<ThrowableEvent> randomEvent = PickedRandomEvent();
         turnEvent.addAll(randomEvent);
         for (ThrowableEvent ev : turnEvent) {
-            ev.throwEvent(this, timelineView);
+            if(game.getStars() > 0) {
+                ev.throwEvent(this, timelineView);
+            }
         }
         turnEvent = new ArrayList<>();
     }
@@ -89,13 +91,13 @@ public class GameController {
 
         int nombrePickEvent = rand.nextInt(3); // nombre d'event qui vont être picked
 
-        game.setPossibleEvent(new ArrayList<ThrowableEvent>());
+        game.setPossibleEvent(new ArrayList<>());
         for (Event ev :game.getEvent()) {
             if(ev.getPrice() < 7)
                 game.getPossibleEvent().add(ev.getThrowable(game));
         }
 
-        ArrayList<ThrowableEvent> pickedEvents = new ArrayList<ThrowableEvent>();
+        ArrayList<ThrowableEvent> pickedEvents = new ArrayList<>();
 
         for(int i = 0; i < nombrePickEvent; i++)
         {

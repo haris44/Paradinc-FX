@@ -81,9 +81,11 @@ import static javafx.scene.input.MouseEvent.MOUSE_RELEASED;
  */
 @DefaultProperty("children")
 public class World extends Region {
+
+
     public enum Resolution { HI_RES, LO_RES };
     private static final StyleablePropertyFactory<World> FACTORY          = new StyleablePropertyFactory<>(Region.getClassCssMetaData());
-    private static final String                          HIRES_PROPERTIES = "map/hires.properties";
+    public static final String                          HIRES_PROPERTIES = "map/hires.properties";
     private static final String                          LORES_PROPERTIES = "map/lores.properties";
     private static final double                          PREFERRED_WIDTH  = 1009;
     private static final double                          PREFERRED_HEIGHT = 665;
@@ -495,6 +497,13 @@ public class World extends Region {
         setTranslateY(getTranslateY() - Y);
     }
 
+    public void setFillColorOfRegion(CountryRegion regions, Color color) {
+        for(Country cnt : regions.getCountries()){
+            final List<CountryPath> PATHS = countryPaths.get(cnt.getName());
+            for (SVGPath path : PATHS) { path.setFill(color); }
+        }
+    }
+
     private void handleMouseEvent(final MouseEvent EVENT, final EventHandler<MouseEvent> HANDLER) {
         final CountryPath       COUNTRY_PATH = (CountryPath) EVENT.getSource();
         final String            COUNTRY_NAME = COUNTRY_PATH.getName();
@@ -503,8 +512,8 @@ public class World extends Region {
 
         final EventType TYPE = EVENT.getEventType();
         if (MOUSE_ENTERED == TYPE) {
-            Color color = isSelectionEnabled() && COUNTRY.equals(getSelectedCountry()) ? getSelectedColor() : getHoverColor();
-            for (SVGPath path : PATHS) { path.setFill(color); }
+            // Color color = isSelectionEnabled() && COUNTRY.equals(getSelectedCountry()) ? getSelectedColor() : getHoverColor();
+            // for (SVGPath path : PATHS) { path.setFill(color); }
         } else if (MOUSE_PRESSED == TYPE) {
             if (isSelectionEnabled()) {
                 Color color;
