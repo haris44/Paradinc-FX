@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import map.ParadincRegion;
 import model.actions.Tweet;
 import model.events.Event;
 import model.events.ThrowableEvent;
@@ -45,6 +46,7 @@ public class TimelineView {
     final private ObservableList<Tweet> tweets;
     Text modalStarsCounter = new Text();
     Label modalStarsLabel = new Label("Stars disponibles");
+    ChoiceBox<ParadincRegion> cbRegions ;
 
     public TimelineView(Stage stage, GameController controller){
 
@@ -80,7 +82,8 @@ public class TimelineView {
         Text globalInfectionLabel = new Text("Population infectée :");
         globalInfectionLabel.getStyleClass().add("title");
         grid.add(globalInfectionLabel,0,currentRow);
-        globalInfection = new Text("10 %");
+        Integer infection = gameCtrl.getGame().getRegionController().getGlobalContamination();
+        globalInfection = new Text(infection + "%");
 
         currentRow +=1;
 
@@ -163,6 +166,8 @@ public class TimelineView {
         turnNumber += 1;
         turnCounter.setText(turnNumber.toString());
         starsCounter.setText(gameCtrl.getGame().getStars().toString());
+        Integer infection = gameCtrl.getGame().getRegionController().getGlobalContamination();
+        globalInfection.setText(infection + "%");
     }
 
 
@@ -194,15 +199,16 @@ public class TimelineView {
         grid.add(modalStarsCounter,0,currentRow);
         currentRow+=1;
 
-        Triple<Slider,Label,Label> robustness = createSlider("Robustesse du langage",0,100,gameCtrl.getLanguage().getRobustness());
+        Integer minRob = gameCtrl.getLanguage().robustness;
+        Triple<Slider,Label,Label> robustness = createSlider("Robustesse du langage",minRob,100,gameCtrl.getLanguage().getRobustness());
 
         grid.add(robustness.y,0,currentRow);
         grid.add(robustness.x,1,currentRow);
         grid.add(robustness.z,2,currentRow);
 
         this.robustness = robustness.x;
-
-        Triple<Slider,Label,Label> facility = createSlider("Simplicité du langage",0,100,gameCtrl.getLanguage().getFacility());
+        Integer minFac = gameCtrl.getLanguage().facility;
+        Triple<Slider,Label,Label> facility = createSlider("Simplicité du langage",minFac,100,gameCtrl.getLanguage().getFacility());
         currentRow+=1;
 
         grid.add(facility.y,0,currentRow);
@@ -211,6 +217,7 @@ public class TimelineView {
         this.facility = facility.x;
 
         currentRow+=1;
+
 
         Button validate = createButton("Valider les modifications du langage");
         validate.setOnAction(new EventHandler<ActionEvent>() {
@@ -224,11 +231,34 @@ public class TimelineView {
             }
         });
         grid.add(validate, 0,currentRow);
-        currentRow +=2;
+
+        currentRow +=1;
+        Separator separator = new Separator();
+
+        Separator separator2 = new Separator();
+
+        grid.add(separator, 0,currentRow);
+        grid.add(separator2, 1,currentRow);
+
+        currentRow +=1;
+
+
+        // first we need to select a region, where our action will be executed
+        Label regionsLabel = new Label("Region :");
+        grid.add(regionsLabel,0,currentRow);
+
+        ArrayList<ParadincRegion> regions = gameCtrl.getGame().getRegionController().getListRegions();
+        cbRegions = new ChoiceBox(FXCollections.observableArrayList(regions));
+        grid.add(cbRegions,1,currentRow);
+
+        currentRow+=1;
+
+        Integer col = 0;
         for (Iterator<Button> I = getBuyableEventsButtons(modal).iterator(); I.hasNext(); ) {
             Button btn = I.next();
-            grid.add(btn,0,currentRow);
-            currentRow +=1;
+            grid.add(btn,col,currentRow);
+            currentRow +=  col.equals(0) ? 0 : 1;
+            col = col.equals(0) ? 1 : 0;
         }
 
         Button closeModalBtn = new Button("Retour au jeu ! ");
@@ -250,26 +280,30 @@ public class TimelineView {
         final Label labelValue = new Label(value.toString());
         final Slider slider = new Slider(min,max,value);
 
+
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                Integer selectedStars = gameCtrl.getStars();
-                Integer value = newValue.intValue();
-                Integer gap = newValue.intValue()-oldValue.intValue();
-                Integer currentStars = selectedStars;
-                Integer nextStars = currentStars - gap;
 
-                if (nextStars>=10 && nextStars<=100) {
-                    labelValue.setText(value.toString());
-                    selectedStars = nextStars;
+                    Integer selectedStars = gameCtrl.getStars();
+                    Integer value = newValue.intValue();
+                    Integer gap = newValue.intValue() - oldValue.intValue();
+                    Integer currentStars = selectedStars;
+                    Integer nextStars = currentStars - gap;
 
-                }
-                else{
-                    slider.setValue(oldValue.intValue());
-                    selectedStars = currentStars;
-                }
-                gameCtrl.setStars(selectedStars);
-                modalStarsCounter.setText("Stars restantes : " + selectedStars.toString());
+
+                    if (nextStars >= 10 && nextStars <= 100) {
+                        labelValue.setText(value.toString());
+                        selectedStars = nextStars;
+
+                    } else {
+                        slider.setValue(oldValue.intValue());
+                        selectedStars = currentStars;
+                    }
+                    gameCtrl.setStars(selectedStars);
+                    modalStarsCounter.setText("Stars restantes : " + selectedStars.toString());
+
+
             }
         });
         return new Triple<Slider,Label,Label>(slider,label,labelValue);
@@ -287,6 +321,7 @@ public class TimelineView {
                 @Override
                 public void handle(ActionEvent e) {
                     ThrowableEvent throwableEvent = event.getThrowable(gameCtrl.getGame());
+                    throwableEvent.setRegion(cbRegions.getValue());
                     gameCtrl.turnEvent.add(throwableEvent);
                     closeModal(stage);
                 }
@@ -315,13 +350,6 @@ public class TimelineView {
         btn.setWrapText(true);
         btn.getStyleClass().add("button");
 
-       /* btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-
-
-            }
-        });*/
         return btn;
     }
 

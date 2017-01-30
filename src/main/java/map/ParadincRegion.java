@@ -27,13 +27,18 @@ public class ParadincRegion {
 
 	public void setContamination(int contamination) {
 		this.contamination = contamination;
+
 		Double otherColor = Math.abs((contamination / 100.0) - 1 );
-		Color newcolor =  new Color(1.0, otherColor, otherColor, 1.0);
-		world.setFillColorOfRegion(region, newcolor);
-		region.setColor(newcolor);
+		Color newColor =  new Color(1.0, otherColor, otherColor, 1.0);
+		world.setFillColorOfRegion(region, newColor);
+		region.setColor(newColor);
 	}
 
 	public String getName() {
 		return name;
 	}
+
+	public  String toString(){
+	    return name;
+    }
 }

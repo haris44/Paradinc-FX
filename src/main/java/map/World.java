@@ -512,8 +512,8 @@ public class World extends Region {
 
         final EventType TYPE = EVENT.getEventType();
         if (MOUSE_ENTERED == TYPE) {
-            Color color = isSelectionEnabled() && COUNTRY.equals(getSelectedCountry()) ? getSelectedColor() : getHoverColor();
-            for (SVGPath path : PATHS) { path.setFill(color); }
+            // Color color = isSelectionEnabled() && COUNTRY.equals(getSelectedCountry()) ? getSelectedColor() : getHoverColor();
+            // for (SVGPath path : PATHS) { path.setFill(color); }
         } else if (MOUSE_PRESSED == TYPE) {
             if (isSelectionEnabled()) {
                 Color color;
