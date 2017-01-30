@@ -25,7 +25,7 @@ public class ParadincRegionController {
 		for (ParadincRegion region : listRegions) {
 			conta += region.getContamination();
 		}
-		return conta;
+		return conta/listRegions.size();
 	}
 	public ParadincRegion pickRegions(){
 		int somme = 0;
