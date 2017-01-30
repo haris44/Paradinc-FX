@@ -1,6 +1,7 @@
 package views;
 
 import controllers.GameController;
+import controllers.ParadincRegionController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -47,6 +48,11 @@ public class TimelineView {
     Label modalStarsLabel = new Label("Stars disponibles");
     ChoiceBox<ParadincRegion> cbRegions ;
 
+    Text europeCount;
+    Text americaCount;
+    Text oceanieCount;
+    Text africaCount;
+
     public TimelineView(Stage stage, GameController controller){
 
         this.gameCtrl = controller;
@@ -57,18 +63,11 @@ public class TimelineView {
         grid.getStylesheets().add(
                 getClass().getResource("../Form.css").toExternalForm()
         );
-
         view = (StackPane) stage.getScene().getRoot().getChildrenUnmodifiable().get(0);
         view.getStylesheets().add("Timeline.css");
         view.setBackground(new Background(new BackgroundFill(Color.web("#E0E0E0"), CornerRadii.EMPTY, Insets.EMPTY)));
         view.getChildren().add(grid);
         view.getStyleClass().add("timeline");
-
-        Text turnCounterLabel = new Text("Tour : ");
-        turnCounterLabel.getStyleClass().add("title");
-        grid.add(turnCounterLabel, 0, currentRow);
-        turnCounter = new Text(turnNumber.toString());
-        grid.add(turnCounter, 1,currentRow);
 
         currentRow +=1;
 
@@ -82,20 +81,44 @@ public class TimelineView {
 
         currentRow +=1;
 
-        Text globalInfectionLabel = new Text("Population infectée :");
+        Text globalInfectionLabel = new Text("Population totale infectée :");
         globalInfectionLabel.getStyleClass().add("title");
         grid.add(globalInfectionLabel,0,currentRow);
         currentRow +=1;
 
+        ParadincRegionController regionController = gameCtrl.getGame().getRegionController();
+        ParadincRegion europe = regionController.getRegions("Europe");
+        String eur = europe.getName() + ": " + europe.getContamination();
+        europeCount = new Text(eur);
+
+        ParadincRegion america = regionController.getRegions("Amerique");
+        String usa = america.getName() + ": " + america.getContamination();
+        americaCount = new Text(usa);
+
+        ParadincRegion africa = regionController.getRegions("Afrique");
+        String afr = africa.getName() + ": " + africa.getContamination();
+        africaCount = new Text(afr);
+
+        ParadincRegion oceania = regionController.getRegions("Océanie");
+        String oce = oceania.getName() + ": " + oceania.getContamination();
+        oceanieCount = new Text(oce);
+
         Integer infection = gameCtrl.getGame().getRegionController().getGlobalContamination();
         globalInfection = new Text(infection + "%");
-        grid.add(globalInfection,0,currentRow);
+        grid.add(globalInfection,0,currentRow++);
 
-        currentRow+=1;
+        grid.add(europeCount, 0, currentRow++);
+        grid.add(americaCount, 0, currentRow++);
+        grid.add(africaCount, 0, currentRow++);
+        grid.add(oceanieCount, 0, currentRow++);
+
+
+
         currentRow+=1;
 
         /* we add to the grid all events that we can throw */
         Text throwableEventsLabel = new Text("Actions possibles");
+        throwableEventsLabel.getStyleClass().add("title");
         Button eventsButton = createButton("Actions");
         eventsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -168,7 +191,6 @@ public class TimelineView {
      */
     public synchronized void notifyTurn(){
         turnNumber += 1;
-        turnCounter.setText(turnNumber.toString());
         Integer starsGap = gameCtrl.getStars()-lastStars;
         Integer infectionGap = gameCtrl.getGame().getRegionController().getGlobalContamination()-lastPropagation;
 
@@ -177,6 +199,24 @@ public class TimelineView {
         globalInfection.setText("("+infectionGap+") "+infection + "%");
         lastStars = gameCtrl.getStars();
         lastPropagation = gameCtrl.getGame().getRegionController().getGlobalContamination();
+
+        ParadincRegionController regionController = gameCtrl.getGame().getRegionController();
+        ParadincRegion europe = regionController.getRegions("Europe");
+        String eur = europe.getName()+ ": " + europe.getContamination();
+        europeCount.setText(eur);
+
+        ParadincRegion america = regionController.getRegions("Amerique");
+        String usa = america.getName()+ ": " + america.getContamination();
+        americaCount.setText(usa);
+
+        ParadincRegion africa = regionController.getRegions("Afrique");
+        String afr = africa.getName() + ": " + africa.getContamination();
+        africaCount.setText(afr);
+
+        ParadincRegion oceania = regionController.getRegions("Océanie");
+        String oce = oceania.getName() + ": " + oceania.getContamination();
+        oceanieCount.setText(oce);
+
     }
 
     public void win() {
@@ -427,7 +467,10 @@ public class TimelineView {
         GridPane grid = new GridPane();
         // space between elements
         grid.setVgap(10);
+        grid.setPrefHeight(300);
+        grid.setPrefWidth(300);
         grid.setPadding(new Insets(5));
+        
         return grid;
     }
 

@@ -33,7 +33,7 @@ public class Tweet {
                 "dd/MM hh:mm");
         return dateFormat.format(date)
 
-                +" : "
+                +" : \n"
                 + this.message;
 
     }
