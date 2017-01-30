@@ -47,7 +47,6 @@ public class ParadincRegionController {
 
 		return currEvent;
 	}
-	// MUST REFACTO / PLEASE, DO NOT USE STRING NAME TO PICK REGION
 	public ParadincRegion getRegions(String name){
 		for (ParadincRegion regions: listRegions) {
 			if(regions.getName() == name){

@@ -13,10 +13,12 @@ import views.TimelineView;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by Alexandre on 15/01/2017.
- */
 public class GameController {
+
+    public final int TIME_TURN = 10;
+    public final int STARS_TURN = 10;
+    public final int MAX_RANDOM_EVENT = 2;
+    public final int MAX_PRICE_RANDOM_EVENT = 10;
 
     Game game;
     Stage stage;
@@ -47,10 +49,9 @@ public class GameController {
     }
 
     private void start() {
-        t = new Turn(5);
+        t = new Turn(TIME_TURN);
         t.run(this);
     }
-
 
     public void turn(){
         ArrayList<ThrowableEvent> randomEvent = PickedRandomEvent();
@@ -61,6 +62,7 @@ public class GameController {
             }
         }
         turnEvent = new ArrayList<>();
+        game.setStars(game.getStars() + STARS_TURN);
     }
 
     public void setStars(int stars){
@@ -91,11 +93,11 @@ public class GameController {
 
         Random rand = new Random();
 
-        int nombrePickEvent = rand.nextInt(3); // nombre d'event qui vont être picked
+        int nombrePickEvent = rand.nextInt(MAX_RANDOM_EVENT);
 
         game.setPossibleEvent(new ArrayList<>());
         for (Event ev :game.getEvent()) {
-            if(ev.getPrice() < 7)
+            if(ev.getPrice() < MAX_PRICE_RANDOM_EVENT)
                 game.getPossibleEvent().add(ev.getThrowable(game));
         }
 
@@ -136,7 +138,6 @@ public class GameController {
         game.getPossibleEvent().remove(currEvent);
         return currEvent;
     }
-
 
 	public void pauseTimer() {
 		t.stop();

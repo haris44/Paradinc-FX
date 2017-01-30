@@ -1,6 +1,8 @@
 package model.events;
 
+import controllers.ParadincRegionController;
 import factory.GameFactory;
+import factory.ParadincRegionFactory;
 import javafx.util.Pair;
 import model.Game;
 import model.language.Attribute;
@@ -31,6 +33,7 @@ public class BugTest {
 		lang.setFacility(35);
 		ArrayList<Attribute> plt = new ArrayList<Attribute>(){{ add(0, Platform.fromPlatformType(PlatformType.Linux));}};
 		lang.setAttributes(plt);
+		ParadincRegionController regionController = ParadincRegionFactory.createRegion();
 
 		// create bug
 		inc = new Bug("Out Of Memory", -10, -2, 0, plt , new Pair<>(15, 3.0), new Pair<>(30, 5.0));
