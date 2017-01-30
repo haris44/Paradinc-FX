@@ -18,22 +18,8 @@ public class main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
         Form form = new Form(primaryStage);
     }
-
-//    @Override
-//    public void start(Stage stage) {
-//        World map = new ParadincMap().getWorld();
-//        StackPane pane = new StackPane(map);
-//        pane.setBackground(new Background(new BackgroundFill(map.getBackgroundColor(), CornerRadii.EMPTY, Insets.EMPTY)));
-//
-//        Scene scene = new Scene(pane);
-//
-//        stage.setTitle("Parad'Inc");
-//        stage.setScene(scene);
-//        stage.show();
-//    }
 
     @Override public void stop() {
         System.exit(0);

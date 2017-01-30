@@ -1,6 +1,7 @@
 package factory;
 
 import controllers.ParadincRegionController;
+import map.ParadincMap;
 import map.ParadincRegion;
 
 /**
@@ -11,10 +12,14 @@ public class ParadincRegionFactory {
 	public static ParadincRegionController createRegion(){
 		ParadincRegionController controller = new ParadincRegionController();
 
-		ParadincRegion europe = new ParadincRegion("Europe");
-		ParadincRegion amerique = new ParadincRegion("Amerique");
+		ParadincMap map = new ParadincMap();
+
+		ParadincRegion europe = new ParadincRegion("Europe", map.getEurope());
+		ParadincRegion amerique = new ParadincRegion("Amerique", map.getAmerica());
 		controller.addRegions(europe);
 		controller.addRegions(amerique);
+
+		controller.setMap(map);
 		return controller;
 
 	}

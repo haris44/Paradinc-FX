@@ -1,5 +1,6 @@
 package controllers;
 
+import map.ParadincMap;
 import map.ParadincRegion;
 import model.Game;
 import model.events.ThrowableEvent;
@@ -13,6 +14,7 @@ import java.util.Random;
 public class ParadincRegionController {
 
 	ArrayList<ParadincRegion> listRegions;
+	ParadincMap map;
 
 	public ParadincRegionController(){
 		listRegions = new ArrayList<>();
@@ -59,5 +61,13 @@ public class ParadincRegionController {
 	}
 	public ArrayList<ParadincRegion> getListRegions() {
 		return listRegions;
+	}
+
+	public void setMap(ParadincMap map) {
+		this.map = map;
+	}
+
+	public ParadincMap getMap() {
+		return map;
 	}
 }

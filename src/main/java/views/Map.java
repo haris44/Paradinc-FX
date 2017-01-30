@@ -36,7 +36,8 @@ public class Map {
                 Map.class.getResource("../Timeline.css").toExternalForm()
         );
 
-        World map = new ParadincMap().getWorld();
+        World map = controller.getGame().getRegionController().getMap().getWorld();
+
         StackPane mapPan = new StackPane(map);
         mapPan.setBackground(new Background(new BackgroundFill(map.getBackgroundColor(), CornerRadii.EMPTY, Insets.EMPTY)));
         map.setTranslateY(WindowSize.TOP_BAR_Y);

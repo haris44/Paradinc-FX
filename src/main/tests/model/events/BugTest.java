@@ -10,10 +10,9 @@ import model.language.PlatformType;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.smartcardio.ATR;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Alex on 29/01/2017.
