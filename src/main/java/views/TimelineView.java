@@ -229,11 +229,24 @@ public class TimelineView {
         });
         grid.add(validate, 0,currentRow);
 
-        currentRow +=2;
+        currentRow +=1;
+        Separator separator = new Separator();
+
+        Separator separator2 = new Separator();
+
+        grid.add(separator, 0,currentRow);
+        grid.add(separator2, 1,currentRow);
+
+        currentRow +=1;
+
+
+
+        Integer col = 0;
         for (Iterator<Button> I = getBuyableEventsButtons(modal).iterator(); I.hasNext(); ) {
             Button btn = I.next();
-            grid.add(btn,0,currentRow);
-            currentRow +=1;
+            grid.add(btn,col,currentRow);
+            currentRow +=  col.equals(0) ? 0 : 1;
+            col = col.equals(0) ? 1 : 0;
         }
 
         Button closeModalBtn = new Button("Retour au jeu ! ");
