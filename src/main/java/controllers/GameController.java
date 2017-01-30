@@ -73,9 +73,11 @@ public class GameController {
         t.stop();
         if(win){
             System.out.println("Vous avez gagner");
+            timelineView.win();
         }
         else{
             System.out.println("Vous avez perdu");
+            timelineView.loose();
         }
     }
     public Integer getStars(){

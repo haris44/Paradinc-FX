@@ -20,13 +20,10 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import map.ParadincRegion;
 import model.actions.Tweet;
-import model.events.Event;
-import model.events.ThrowableEvent;
+import model.events.*;
 import utils.Triple;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * Created by nathan on 18/01/17.
@@ -168,9 +165,34 @@ public class TimelineView {
         starsCounter.setText(gameCtrl.getGame().getStars().toString());
         Integer infection = gameCtrl.getGame().getRegionController().getGlobalContamination();
         globalInfection.setText(infection + "%");
+
     }
 
+    public void win() {
+        GridPane grid = clear();
+        grid.getStyleClass().add("win");
+       grid.add(new Text("C'est gagné !"),3,3);
+    }
+    public void loose(){
+        GridPane grid = clear();
+        grid.getStyleClass().add("loose");
 
+        grid.add(new Text("C'est perdu !"),3,3);
+
+    }
+
+    public GridPane clear(){
+        GridPane root = new GridPane();
+        root.setHgap(1);
+        root.setVgap(1);
+        grid.getStylesheets().add(
+                getClass().getResource("../Form.css").toExternalForm()
+        );
+
+        Scene scene = new Scene(root,1366, 768);
+        stage.setScene(scene);
+        return root;
+    }
     public void openModal(Stage parent){
 
         gameCtrl.pauseTimer();
@@ -194,26 +216,26 @@ public class TimelineView {
         modalStarsCounter.setText(gameCtrl.getStars().toString());
         GridPane modalGrid = createGrid();
         modal.setScene(modalScene);
-        grid.add(modalStarsLabel,0,currentRow);
+        grid.add(modalStarsLabel,2,currentRow);
         currentRow+=1;
-        grid.add(modalStarsCounter,0,currentRow);
+        grid.add(modalStarsCounter,2,currentRow);
         currentRow+=1;
 
         Integer minRob = gameCtrl.getLanguage().robustness;
         Triple<Slider,Label,Label> robustness = createSlider("Robustesse du langage",minRob,100,gameCtrl.getLanguage().getRobustness());
 
-        grid.add(robustness.y,0,currentRow);
-        grid.add(robustness.x,1,currentRow);
-        grid.add(robustness.z,2,currentRow);
+        grid.add(robustness.y,2,currentRow);
+        grid.add(robustness.x,3,currentRow);
+        grid.add(robustness.z,4,currentRow);
 
         this.robustness = robustness.x;
         Integer minFac = gameCtrl.getLanguage().facility;
         Triple<Slider,Label,Label> facility = createSlider("Simplicité du langage",minFac,100,gameCtrl.getLanguage().getFacility());
         currentRow+=1;
 
-        grid.add(facility.y,0,currentRow);
-        grid.add(facility.x,1,currentRow);
-        grid.add(facility.z,2,currentRow);
+        grid.add(facility.y,2,currentRow);
+        grid.add(facility.x,3,currentRow);
+        grid.add(facility.z,4,currentRow);
         this.facility = facility.x;
 
         currentRow+=1;
@@ -230,45 +252,40 @@ public class TimelineView {
                 closeModal(modal);
             }
         });
-        grid.add(validate, 0,currentRow);
+        grid.add(validate, 2,currentRow);
 
         currentRow +=1;
-        Separator separator = new Separator();
-
-        Separator separator2 = new Separator();
-
-        grid.add(separator, 0,currentRow);
-        grid.add(separator2, 1,currentRow);
-
+        for (Integer x = 0; x < 5; x++){
+            Separator separator = new Separator();
+            grid.add(separator, x,currentRow);
+        }
         currentRow +=1;
-
 
         // first we need to select a region, where our action will be executed
         Label regionsLabel = new Label("Region :");
-        grid.add(regionsLabel,0,currentRow);
+        grid.add(regionsLabel,1,currentRow);
 
         ArrayList<ParadincRegion> regions = gameCtrl.getGame().getRegionController().getListRegions();
         cbRegions = new ChoiceBox(FXCollections.observableArrayList(regions));
-        grid.add(cbRegions,1,currentRow);
+        cbRegions.getSelectionModel().selectFirst();
+        grid.add(cbRegions,2,currentRow);
 
+        currentRow+=1;
         currentRow+=1;
 
         Integer col = 0;
-        for (Iterator<Button> I = getBuyableEventsButtons(modal).iterator(); I.hasNext(); ) {
-            Button btn = I.next();
-            grid.add(btn,col,currentRow);
-            currentRow +=  col.equals(0) ? 0 : 1;
-            col = col.equals(0) ? 1 : 0;
-        }
+        currentRow = getBuyableEventsButtons(modal, grid, currentRow);
+
 
         Button closeModalBtn = new Button("Retour au jeu ! ");
         closeModalBtn.setMaxWidth(300);
         closeModalBtn.setWrapText(true);
         closeModalBtn.getStyleClass().add("button");
+        closeModalBtn.getStyleClass().add("others");
 
         closeModalBtn.setOnAction(e -> closeModal(modal));
 
-        grid.add(closeModalBtn, 0, currentRow + 1 );
+        grid.add(closeModalBtn, 2, currentRow + 1 );
 
         modal.initModality(Modality.APPLICATION_MODAL);
         modal.showAndWait();
@@ -285,23 +302,24 @@ public class TimelineView {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
-                    Integer selectedStars = gameCtrl.getStars();
-                    Integer value = newValue.intValue();
-                    Integer gap = newValue.intValue() - oldValue.intValue();
-                    Integer currentStars = selectedStars;
-                    Integer nextStars = currentStars - gap;
+                        Integer selectedStars = gameCtrl.getStars();
+                        Integer value = newValue.intValue();
+                        Integer gap = newValue.intValue() - oldValue.intValue();
+                        Integer currentStars = selectedStars;
+                        Integer nextStars = currentStars - gap;
 
 
-                    if (nextStars >= 10 && nextStars <= 100) {
-                        labelValue.setText(value.toString());
-                        selectedStars = nextStars;
+                        if (nextStars >= 10 && nextStars <= 100) {
+                            labelValue.setText(value.toString());
+                            selectedStars = nextStars;
 
-                    } else {
-                        slider.setValue(oldValue.intValue());
-                        selectedStars = currentStars;
-                    }
-                    gameCtrl.setStars(selectedStars);
-                    modalStarsCounter.setText("Stars restantes : " + selectedStars.toString());
+                        } else {
+                            slider.setValue(oldValue.intValue());
+                            selectedStars = currentStars;
+                        }
+                        gameCtrl.setStars(selectedStars);
+                        modalStarsCounter.setText("Stars restantes : " + selectedStars.toString());
+
 
 
             }
@@ -309,26 +327,83 @@ public class TimelineView {
         return new Triple<Slider,Label,Label>(slider,label,labelValue);
     }
 
-    public ArrayList<Button> getBuyableEventsButtons(Stage stage) {
-        ArrayList buttons = new ArrayList<HBox>();
+    public Integer getBuyableEventsButtons(Stage stage, GridPane grid, Integer currentRow) {
+
+
         ArrayList<Event> events = gameCtrl.getGame().getBuyableEvents();
+        Text error = new Text("");
+        grid.add(error, 2,currentRow);
+        currentRow++;
+        grid.add(new Text("Conferences"),0,currentRow);
+        grid.add(new Text("Tweets"),1,currentRow);
+        grid.add(new Text("Comunautées"),2,currentRow);
+        grid.add(new Text("Journaux"),3,currentRow);
+        grid.add(new Text("Evangelist"),4,currentRow);
+        currentRow ++;
+        Integer row1 = currentRow;
+        Integer row2 = currentRow;
+        Integer row3 = currentRow;
+        Integer row4 = currentRow;
+        Integer row5 = currentRow;
         for (Iterator<Event> I = events.iterator(); I.hasNext(); ) {
            Event event = I.next();
+           Integer col;
            String label = new String("(-" + event.getPrice()  +  " stars)  " + event.getName() );
            Button btn = createButton(label);
            TimelineView self = this;
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
-                    ThrowableEvent throwableEvent = event.getThrowable(gameCtrl.getGame());
-                    throwableEvent.setRegion(cbRegions.getValue());
-                    gameCtrl.turnEvent.add(throwableEvent);
-                    closeModal(stage);
+                    if(gameCtrl.getStars()-event.getPrice() > 0){
+                        ThrowableEvent throwableEvent = event.getThrowable(gameCtrl.getGame());
+                        throwableEvent.setRegion(cbRegions.getValue());
+                        gameCtrl.turnEvent.add(throwableEvent);
+                        closeModal(stage);
+                    }
+                    else{
+                        error.setText("Pas assez de stars disponibles");
+                    }
+
                 }
             });
-            buttons.add(btn);
+            if(Conference.class.isInstance(event)){
+                btn.getStyleClass().add("conference");
+                grid.add(btn,0,row1);
+                row1 ++;
+            }
+            else if (model.events.Tweet.class.isInstance(event) ) {
+                btn.getStyleClass().add("tweet");
+
+                grid.add(btn,1,row2);
+                row2++;
+            }
+            else if (Community.class.isInstance(event) ) {
+                btn.getStyleClass().add("comunity");
+
+                grid.add(btn,2,row3);
+                row3++;
+            }
+            else if (NewsPaper.class.isInstance(event) ) {
+                btn.getStyleClass().add("newspaper");
+
+                grid.add(btn,3,row4);
+                row4++;
+            }
+            else if (Evangelist.class.isInstance(event) ){
+                btn.getStyleClass().add("evangelist");
+                grid.add(btn,4,row5);
+                row5++;
+            }
+            else {
+                btn.getStyleClass().add("others");
+                grid.add(btn,5,8);
+                row5++;
+            }
+
+
         }
-        return buttons;
+
+        return Collections.max(Arrays.asList(row1,row2,row3,row4,row5));
     }
 
     private void closeModal(Stage stage){
