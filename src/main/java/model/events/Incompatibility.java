@@ -26,7 +26,7 @@ public class Incompatibility extends Event {
 
 	@Override
 	public ThrowableEvent getThrowable(Game game) {
-		ArrayList<Integer> proba = new ArrayList<Integer>();
+		ArrayList<Integer> proba = new ArrayList<>();
 		proba.add(this.processAttribute(this.robustness, game.getLanguage().robustness));
 		proba.add(this.processAttribute(platform, game, PlatformType.class));
 

@@ -6,11 +6,7 @@ import model.Game;
 
 import java.util.ArrayList;
 
-/**
- * Created by Alex on 05/12/2016.
- */
 
-// Please check Bug to create the conference event
 public class Conference extends Event {
 
 	Pair<Integer, Double>  contamination;

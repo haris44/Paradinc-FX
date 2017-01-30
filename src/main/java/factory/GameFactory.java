@@ -10,6 +10,7 @@ import model.language.Attribute;
 import model.language.Language;
 import model.language.Platform;
 import model.language.PlatformType;
+import utils.PlatformArray;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -18,20 +19,14 @@ import java.util.ArrayList;
 public class GameFactory {
 
     public static Game createGame(Language language, Integer stars){
-        ArrayList<Event> event = new ArrayList<Event>();
+        ArrayList<Event> event = new ArrayList<>();
 
-        ArrayList<Attribute> allPlatform = new ArrayList<Attribute>(3){{
-            add(Platform.fromPlatformType(PlatformType.Windows));
-            add(Platform.fromPlatformType(PlatformType.Unix));
-            add(Platform.fromPlatformType(PlatformType.Linux));
-        }};
-
-        event.add(new Bug("Out Of Memory", -10, -2, 0, allPlatform , new Pair<>(20, 1.0), new Pair<>(0, 0.0)));
-        event.add(new Bug("NullPointerException", -10, -2, 0, allPlatform, new Pair<>(10, 1.0), new Pair<>(0, 0.0)));
-        event.add(new Bug("Dépendance Deprecated", -10, -2, 0, allPlatform, new Pair<>(48, 2.0), new Pair<>(0, 0.0)));
-        event.add(new Bug("Array Out of Bound", -10, -2, 0, allPlatform, new Pair<>(10, 1.0), new Pair<>(0, 0.0)));
-        event.add(new Bug("Lenteur de traitement", -10, -2, 0, allPlatform, new Pair<>(70, 1.0), new Pair<>(0, 0.0)));
-        event.add(new Bug("Utilisation processeur intensive", -10, -2, 0, allPlatform, new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
+        event.add(new Bug("Out Of Memory", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(20, 1.0), new Pair<>(0, 0.0)));
+        event.add(new Bug("NullPointerException", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(10, 1.0), new Pair<>(0, 0.0)));
+        event.add(new Bug("Dépendance Deprecated", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(48, 2.0), new Pair<>(0, 0.0)));
+        event.add(new Bug("Array Out of Bound", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(10, 1.0), new Pair<>(0, 0.0)));
+        event.add(new Bug("Lenteur de traitement", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(70, 1.0), new Pair<>(0, 0.0)));
+        event.add(new Bug("Utilisation processeur intensive", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
 
         ParadincRegionController regionController = ParadincRegionFactory.createRegion();
 

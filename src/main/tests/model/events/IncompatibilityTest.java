@@ -1,6 +1,7 @@
 package model.events;
 
 import factory.GameFactory;
+import javafx.util.Pair;
 import model.Game;
 import model.language.Attribute;
 import model.language.Language;
@@ -24,7 +25,7 @@ public class IncompatibilityTest {
 	public void setUp() {
 		Language lang = new Language("test", 100, 0);
 		lang.setAttributes(new ArrayList<Attribute>(){{ add(0, Platform.fromPlatformType(PlatformType.Linux));}});
-		Incompatibility inc = new Incompatibility("test", 0, 0, 0, new ArrayList<Attribute>(){{ add(0, Platform.fromPlatformType(PlatformType.Linux));}});
+		Incompatibility inc = new Incompatibility("test", 0, 0, 0, new ArrayList<Attribute>(){{ add(0, Platform.fromPlatformType(PlatformType.Linux));}},  new Pair<>(20, 1.0));
 		game = GameFactory.createGame(lang, 20);
 		thrEv = inc.getThrowable(game);
 	}
@@ -39,7 +40,7 @@ public class IncompatibilityTest {
 		Language lang = game.getLanguage();
 		lang.setAttributes(new ArrayList<Attribute>(){{ add(Platform.fromPlatformType(PlatformType.Unix));}});
 		game.setLanguage(lang);
-		Incompatibility inc = new Incompatibility("test", 0, 0, 0, new ArrayList<Attribute>(){{ add(0, Platform.fromPlatformType(PlatformType.Linux));}});
+		Incompatibility inc = new Incompatibility("test", 0, 0, 0, new ArrayList<Attribute>(){{ add(0, Platform.fromPlatformType(PlatformType.Linux));}},  new Pair<>(20, 1.0));
 		thrEv = inc.getThrowable(game);
 		assertEquals(thrEv.probability, 0);
 	}
