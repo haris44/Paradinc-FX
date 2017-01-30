@@ -54,6 +54,13 @@ public class GameFactory {
         event.add(new Evangelist("Julien Tanguy parle de votre language", 0, 30, 10, new Pair<>(25, 3.0), new Pair<>(20, 2.0)));
 
 
+        event.add(new Tweet("Quentin Adam promeux votre langage",0,10,2, new Pair<>(25,5.0), new Pair<>(2,5.0), PlatformArray.getAllPlatform()));
+        event.add(new Tweet("Votre tweet annonçant la nouvelle version atteiind les 200RT",0,6,1, new Pair<>(100,1.0), new Pair<>(100,1.0),PlatformArray.getAllPlatform()));
+        event.add(new Tweet("De plus en plus de dev conçoivent des POC avec votre langage",0,15,5,new Pair<>(25,2.0), new Pair<>(25,3.0),PlatformArray.getAllPlatform()));
+        event.add(new Tweet("Vimaire44 aime tout les tweets concernant votre lanage",0,4,1, new Pair<>(55,3.0), new Pair<>(15,7.0),PlatformArray.getAllPlatform()));
+        event.add(new Tweet("Gcouprie créer une liste concernant votre lanage",0,7,3, new Pair<>(55,5.0), new Pair<>(75,4.0),PlatformArray.getAllPlatform()));
+        
+
 
         ParadincRegionController regionController = ParadincRegionFactory.createRegion();
 
