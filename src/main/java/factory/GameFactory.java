@@ -61,8 +61,9 @@ public class GameFactory {
         event.add(new Tweet("Vimaire44 aime tout les tweets concernant votre lanage",0,4,1, new Pair<>(55,3.0), new Pair<>(15,7.0),PlatformArray.getAllPlatform()));
         event.add(new Tweet("Gcouprie créer une liste concernant votre lanage",0,7,3, new Pair<>(55,5.0), new Pair<>(75,4.0),PlatformArray.getAllPlatform()));
         event.add(new Tweet("Des tweets remettent en cause votre langage",0,-5,-4, new Pair<>(0,3.0), new Pair<>(10,3.0),PlatformArray.getAllPlatform()));
-        event.add(new Tweet("Des utilisateurs créer un compte parodique pour votre langage",0,-6,-6,new Pair<>(15,6.0),new Pair<>(0,1.0)));
-        
+        event.add(new Tweet("Des utilisateurs créer un compte parodique pour votre langage",0,-6,-6,new Pair<>(15,6.0),new Pair<>(0,1.0),PlatformArray.getAllPlatform()));
+
+        event.add(new Community("La NASA perd le contrôle d'un rover martien suite à un bug dans votre langage",0,-40,40, new Pair<>(0,0.0), new Pair<>(80,5.0),PlatformArray.getAllPlatform()));
 
 
         ParadincRegionController regionController = ParadincRegionFactory.createRegion();
