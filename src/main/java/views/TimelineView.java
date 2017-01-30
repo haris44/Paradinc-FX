@@ -165,9 +165,34 @@ public class TimelineView {
         starsCounter.setText(gameCtrl.getGame().getStars().toString());
         Integer infection = gameCtrl.getGame().getRegionController().getGlobalContamination();
         globalInfection.setText(infection + "%");
+
     }
 
+    public void win() {
+        GridPane grid = clear();
+        grid.getStyleClass().add("win");
+       grid.add(new Text("C'est gagné !"),3,3);
+    }
+    public void loose(){
+        GridPane grid = clear();
+        grid.getStyleClass().add("loose");
 
+        grid.add(new Text("C'est perdu !"),3,3);
+
+    }
+
+    public GridPane clear(){
+        GridPane root = new GridPane();
+        root.setHgap(1);
+        root.setVgap(1);
+        grid.getStylesheets().add(
+                getClass().getResource("../Form.css").toExternalForm()
+        );
+
+        Scene scene = new Scene(root,1366, 768);
+        stage.setScene(scene);
+        return root;
+    }
     public void openModal(Stage parent){
 
         gameCtrl.pauseTimer();
@@ -236,8 +261,6 @@ public class TimelineView {
         }
         currentRow +=1;
 
-
-
         // first we need to select a region, where our action will be executed
         Label regionsLabel = new Label("Region :");
         grid.add(regionsLabel,1,currentRow);
@@ -279,23 +302,24 @@ public class TimelineView {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
-                    Integer selectedStars = gameCtrl.getStars();
-                    Integer value = newValue.intValue();
-                    Integer gap = newValue.intValue() - oldValue.intValue();
-                    Integer currentStars = selectedStars;
-                    Integer nextStars = currentStars - gap;
+                        Integer selectedStars = gameCtrl.getStars();
+                        Integer value = newValue.intValue();
+                        Integer gap = newValue.intValue() - oldValue.intValue();
+                        Integer currentStars = selectedStars;
+                        Integer nextStars = currentStars - gap;
 
 
-                    if (nextStars >= 10 && nextStars <= 100) {
-                        labelValue.setText(value.toString());
-                        selectedStars = nextStars;
+                        if (nextStars >= 10 && nextStars <= 100) {
+                            labelValue.setText(value.toString());
+                            selectedStars = nextStars;
 
-                    } else {
-                        slider.setValue(oldValue.intValue());
-                        selectedStars = currentStars;
-                    }
-                    gameCtrl.setStars(selectedStars);
-                    modalStarsCounter.setText("Stars restantes : " + selectedStars.toString());
+                        } else {
+                            slider.setValue(oldValue.intValue());
+                            selectedStars = currentStars;
+                        }
+                        gameCtrl.setStars(selectedStars);
+                        modalStarsCounter.setText("Stars restantes : " + selectedStars.toString());
+
 
 
             }
