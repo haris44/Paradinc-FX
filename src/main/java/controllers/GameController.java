@@ -15,8 +15,8 @@ import java.util.Random;
 
 public class GameController {
 
-    public final int TIME_TURN = 10;
-    public final int STARS_TURN = 15;
+    public final int TIME_TURN = 5;
+    public final int STARS_TURN = 10;
     public final int MAX_RANDOM_EVENT = 2;
     public final int MAX_PRICE_RANDOM_EVENT = 20;
 
