@@ -222,7 +222,7 @@ public class TimelineView {
     public void win() {
         GridPane grid = clear();
         grid.getStyleClass().add("win");
-       grid.add(new Text("C'est gagné !"),3,3);
+        grid.add(new Text("C'est gagné !"),3,3);
     }
     public void loose(){
         GridPane grid = clear();
