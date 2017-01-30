@@ -57,7 +57,12 @@ public class GameController {
         ArrayList<ThrowableEvent> randomEvent = PickedRandomEvent();
         turnEvent.addAll(randomEvent);
         for (ThrowableEvent ev : turnEvent) {
-            if(game.getStars() > 0) {
+            if(game.getStars() <= 0 || game.getRegionController().getGlobalContamination() <= 0) {
+                stopGame(false);
+            }
+            else if(game.getRegionController().getGlobalContamination() >= 99){
+                stopGame(true);
+            }else {
                 ev.throwEvent(this, timelineView);
             }
         }

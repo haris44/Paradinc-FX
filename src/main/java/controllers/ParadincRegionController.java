@@ -27,6 +27,8 @@ public class ParadincRegionController {
 		}
 		return conta ;
 	}
+
+
 	public ParadincRegion pickRegions(){
 		int somme = 0;
 		for (ParadincRegion ev : listRegions) {
