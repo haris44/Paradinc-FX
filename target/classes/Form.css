@@ -1,0 +1,100 @@
+.grid {
+    -fx-background: #20629F;
+    -fx-background-color: linear-gradient( #2F567A 0%, #2567A4 50%, #296BA8 100%);
+    -fx-background-insets: 0,1,4,5,6;
+    -fx-background-image: url("grid.png");
+    -fx-background-repeat: repeat;
+}
+.separator{
+    -fx-background-color: #F5F5F5;
+}
+.padding{
+    -fx-padding: 15px;
+}
+Label{
+    -fx-text-fill: #f5f5f5;
+}
+.title{
+    -fx-text-fill: #f5f5f5;
+    -fx-font-weight: bold;
+}
+
+ChoiceBox> Label{
+    -fx-text-fill: #212121;
+}
+.button{
+    -fx-background-color:#F44336;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+    -fx-border-radius: 0;
+    -fx-margin: 15px;
+}
+.button:pressed{
+    -fx-background-color:#E53935;
+}
+
+.conference{
+    -fx-background-color:#8BC34A;
+}
+.conference:pressed{
+    -fx-background-color: #558B2F;
+}
+
+.tweet{
+    -fx-background-color:#2196F3;
+}
+.tweet:pressed{
+    -fx-background-color: #1565C0;
+}
+
+.comunity{
+    -fx-background-color:#009688;
+}
+.comunity:pressed{
+    -fx-background-color: #00695C;
+}
+
+.newspaper{
+    -fx-text-fill: #212121;
+    -fx-background-color:#FFC107;
+}
+.newspaper:pressed{
+    -fx-text-fill: #212121;
+    -fx-background-color: #FF8F00;
+}
+
+.evangelist{
+    -fx-background-color:#673AB7;
+}
+.evangelist:pressed{
+    -fx-background-color: #4527A0;
+}
+.others{
+    -fx-background-color:#607D8B;
+}
+.others:pressed{
+    -fx-background-color: #37474F;
+}
+.error{
+    -fx-text-fill: #E53935;
+}
+.button Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
+}
+.logo{
+    -fx-background: #20629F;
+    -fx-background-image: url("paradinc.png");
+    -fx-background-repeat: no-repeat;
+}
+.loose{
+    -fx-text-fill: #E53935;
+    -fx-font-weight: bold;
+}
+.win{
+    -fx-text-fill: #8BC34A;
+    -fx-font-weight: bold;
+}
