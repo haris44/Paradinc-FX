@@ -33,20 +33,6 @@ public class GameFactory {
         event.add(new Bug("Lenteur de traitement", -10, -2, 0, allPlatform, new Pair<>(70, 1.0), new Pair<>(0, 0.0)));
         event.add(new Bug("Utilisation processeur intensive", -10, -2, 0, allPlatform, new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
 
-
-        event.add(new Conference("Conférence de présentation du langage", 50, 40, 10, new Pair<>(30, 2.0)));
-        event.add(new Conference("Présentation de mise à jour", 60, 20, 20, new Pair<>(70, 2.0)));
-
-        event.add(new Tweet("Présentation de mise à jour", 60, 20, 20, new Pair<>(70, 2.0), new Pair<>(30, 0.4)));
-
-        event.add(new Community("Présentation de mise à jour", 60, 20, 20, new Pair<>(70, 2.0)));
-
-        event.add(new NewsPaper("Présentation de mise à jour", 60, 20, 20, new Pair<>(70, 2.0)));
-
-        event.add(new Evangelist("Présentation de mise à jour", 60, 20, 20, new Pair<>(70, 2.0)));
-
-
-
         ParadincRegionController regionController = ParadincRegionFactory.createRegion();
 
         // SET DEFAULT CONTAMINATION OF FIRST REGIONS HERE

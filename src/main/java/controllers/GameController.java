@@ -13,9 +13,6 @@ import views.TimelineView;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by Alexandre on 15/01/2017.
- */
 public class GameController {
 
     Game game;
