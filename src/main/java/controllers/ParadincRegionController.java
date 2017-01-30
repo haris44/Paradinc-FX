@@ -25,11 +25,9 @@ public class ParadincRegionController {
 		for (ParadincRegion region : listRegions) {
 			conta += region.getContamination();
 		}
-<<<<<<< HEAD
+
 		return conta/listRegions.size();
-=======
-		return conta ;
->>>>>>> 4afbfc221980d5f1c36ebf3d8636baf11fbe0cde
+
 	}
 	public ParadincRegion pickRegions(){
 		int somme = 0;
