@@ -29,7 +29,7 @@ public class GameFactory {
         event.add(new Bug("Lenteur de traitement", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(70, 1.0), new Pair<>(0, 0.0)));
         event.add(new Bug("Utilisation processeur intensive", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
 
-        event.add(new NewsPaper("Utilisation processeur intensive", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
+        event.add(new NewsPaper("Utilisation processeur intensive", -10, -2, 0,  new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
 
 
 

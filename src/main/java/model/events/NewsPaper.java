@@ -23,7 +23,7 @@ public class NewsPaper extends Event {
 	@Override
 	public ThrowableEvent getThrowable(Game game) {
 		ArrayList<Integer> proba = new ArrayList<>();
-		proba.add(processAttribute(robustness, game.getLanguage().getRobustness());
+		proba.add(processAttribute(robustness, game.getLanguage().getRobustness()));
 		proba.add(processAttribute(facility, game.getLanguage().getFacility()));
 		ParadincRegion regions = game.getRegionController().pickRegions();
 		return new ThrowableEvent(this, 1, this.getMoyenne(proba), price, regions);
