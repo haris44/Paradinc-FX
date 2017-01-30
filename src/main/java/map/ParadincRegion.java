@@ -27,9 +27,11 @@ public class ParadincRegion {
 
 	public void setContamination(int contamination) {
 		this.contamination = contamination;
-
-		Double otherColor = Math.abs((contamination / 100.0) - 1 );
-		Color newColor =  new Color(1.0, otherColor, otherColor, 1.0);
+		Double otherColor = 1.0;
+		if(contamination > 0){
+			 otherColor = Math.abs((contamination / 100.0) - 1 );
+		}
+		Color newColor = new Color(1.0, otherColor, otherColor, 1.0);
 		world.setFillColorOfRegion(region, newColor);
 		region.setColor(newColor);
 	}
