@@ -5,9 +5,7 @@ import javafx.util.Pair;
 import map.ParadincRegion;
 import model.Game;
 import model.Timeline;
-import model.events.Bug;
-import model.events.Conference;
-import model.events.Event;
+import model.events.*;
 import model.language.Attribute;
 import model.language.Language;
 import model.language.Platform;
@@ -38,6 +36,16 @@ public class GameFactory {
 
         event.add(new Conference("Conférence de présentation du langage", 50, 40, 10, new Pair<>(30, 2.0)));
         event.add(new Conference("Présentation de mise à jour", 60, 20, 20, new Pair<>(70, 2.0)));
+
+        event.add(new Tweet("Présentation de mise à jour", 60, 20, 20, new Pair<>(70, 2.0), new Pair<>(30, 0.4)));
+
+        event.add(new Community("Présentation de mise à jour", 60, 20, 20, new Pair<>(70, 2.0)));
+
+        event.add(new NewsPaper("Présentation de mise à jour", 60, 20, 20, new Pair<>(70, 2.0)));
+
+        event.add(new Evangelist("Présentation de mise à jour", 60, 20, 20, new Pair<>(70, 2.0)));
+
+
 
         ParadincRegionController regionController = ParadincRegionFactory.createRegion();
 
