@@ -72,7 +72,7 @@ public class GameFactory {
         event.add(new Community("Les vieux informaticiens d'intéressent à votre langage",0,10,3, new Pair<>(10,4.0), new Pair<>(75,6.0),PlatformArray.getAllPlatform()));
         event.add(new Community("Publication d'un audite de sécurité désastraux",0,-30,-25, new Pair<>(0,5.0), new Pair<>(1,10.0),PlatformArray.getAllPlatform()));
         event.add(new Community("Distribution de sitcker",7,5,5, new Pair<>(1,1.0), new Pair<>(1,1.0),PlatformArray.getAllPlatform()));
-        event.add(new Community("Partenariat avec des étudiants",15,3,7, new Pair<>(1,1.0), new Pair<>(50,2.0),PlatformArray.getAllPlatform()));
+        event.add(new Community("Partenariat avec des étudiants",35,16,7, new Pair<>(1,1.0), new Pair<>(50,2.0),PlatformArray.getAllPlatform()));
 
 
         ParadincRegionController regionController = ParadincRegionFactory.createRegion();
