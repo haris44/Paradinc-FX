@@ -50,8 +50,10 @@ public class GameFactory {
         event.add(new Conference("Conférence qui critique la facilité", 0, -70, -50, new Pair<>(80, 7.0), new Pair<>(10, 7.0), new Pair<>(40, 2.0)));
         event.add(new Conference("Conférence qui critique la fiabilité", 0, -70, -50, new Pair<>(10, 7.0), new Pair<>(80, 7.0), new Pair<>(40, 2.0)));
 
-        event.add(new Evangelist("FG Oblige iAdvize à adopter votre language", 0, 40, 10, new Pair<>(75, 5.0), new Pair<>(20, 4.0)));
-        event.add(new Evangelist("Julien Tanguy parle de votre language", 0, 30, 10, new Pair<>(25, 3.0), new Pair<>(20, 2.0)));
+        event.add(new Evangelist("FG Oblige iAdvize à adopter votre langage", 0, 40, 10, new Pair<>(75, 5.0), new Pair<>(20, 4.0)));
+        event.add(new Evangelist("Julien Tanguy parle de votre langage", 0, 30, 10, new Pair<>(25, 3.0), new Pair<>(20, 2.0)));
+        event.add(new Evangelist("Steve Ballmer annonce travailler sur le support de votre langage", 0, -20, -10, new Pair<>(80, 5.0), new Pair<>(20, 4.0)));
+        event.add(new Evangelist("Mathias Braux vend votre lanage auprès de ses étudiants",0,-40,-30, new Pair<>(100,4.0), new Pair<>(90,2.0)));
 
 
         event.add(new Tweet("Quentin Adam promeux votre langage",0,10,2, new Pair<>(25,5.0), new Pair<>(2,5.0), PlatformArray.getAllPlatform()));
@@ -59,6 +61,8 @@ public class GameFactory {
         event.add(new Tweet("De plus en plus de dev conçoivent des POC avec votre langage",0,15,5,new Pair<>(25,2.0), new Pair<>(25,3.0),PlatformArray.getAllPlatform()));
         event.add(new Tweet("Vimaire44 aime tout les tweets concernant votre lanage",0,4,1, new Pair<>(55,3.0), new Pair<>(15,7.0),PlatformArray.getAllPlatform()));
         event.add(new Tweet("Gcouprie créer une liste concernant votre lanage",0,7,3, new Pair<>(55,5.0), new Pair<>(75,4.0),PlatformArray.getAllPlatform()));
+        event.add(new Tweet("Des tweets remettent en cause votre langage",0,-5,-4, new Pair<>(0,3.0), new Pair<>(10,3.0),PlatformArray.getAllPlatform()));
+        event.add(new Tweet("Des utilisateurs créer un compte parodique pour votre langage",0,-6,-6,new Pair<>(15,6.0),new Pair<>(0,1.0)));
         
 
 
