@@ -80,7 +80,8 @@ public class TimelineView {
         Text globalInfectionLabel = new Text("Population infectée :");
         globalInfectionLabel.getStyleClass().add("title");
         grid.add(globalInfectionLabel,0,currentRow);
-        globalInfection = new Text("10 %");
+        Integer infection = gameCtrl.getGame().getRegionController().getGlobalContamination();
+        globalInfection = new Text(infection + "%");
 
         currentRow +=1;
 
@@ -163,6 +164,8 @@ public class TimelineView {
         turnNumber += 1;
         turnCounter.setText(turnNumber.toString());
         starsCounter.setText(gameCtrl.getGame().getStars().toString());
+        Integer infection = gameCtrl.getGame().getRegionController().getGlobalContamination();
+        globalInfection.setText(infection + "%");
     }
 
 
