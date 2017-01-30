@@ -466,10 +466,9 @@ public class TimelineView {
     public GridPane createGrid(){
         GridPane grid = new GridPane();
         // space between elements
-        grid.setVgap(10);
-        grid.setPrefHeight(300);
-        grid.setPrefWidth(300);
-        grid.setPadding(new Insets(5));
+        grid.setVgap(1);
+        grid.setHgap(1);
+        grid.setAlignment(Pos.CENTER);
 
         return grid;
     }
