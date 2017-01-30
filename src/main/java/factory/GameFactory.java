@@ -51,7 +51,7 @@ public class GameFactory {
         event.add(new Conference("Conférence qui critique la fiabilité", 0, -70, -50, new Pair<>(10, 7.0), new Pair<>(80, 7.0), new Pair<>(40, 2.0)));
 
         event.add(new Evangelist("Financement d'une tournée promotionnel", 75, 20, 25, new Pair<>(45, 3.0), new Pair<>(40, 2.0)));
-        event.add(new Evangelist("Fiancement d'un évanhgéliste", 50, 10, 20, new Pair<>(25, 5.0), new Pair<>(25, 5.0)));
+        event.add(new Evangelist("Fiancement d'un évangéliste", 50, 10, 20, new Pair<>(25, 5.0), new Pair<>(25, 5.0)));
         event.add(new Evangelist("FG Oblige iAdvize à adopter votre langage", 0, 40, 10, new Pair<>(75, 5.0), new Pair<>(20, 4.0)));
         event.add(new Evangelist("Julien Tanguy parle de votre langage", 0, 30, 10, new Pair<>(25, 3.0), new Pair<>(20, 2.0)));
         event.add(new Evangelist("Steve Ballmer annonce travailler sur le support de votre langage", 0, -20, -10, new Pair<>(80, 5.0), new Pair<>(20, 4.0)));
