@@ -17,6 +17,7 @@ Label{
 .title{
     -fx-text-fill: #f5f5f5;
 }
+
 ChoiceBox> Label{
     -fx-text-fill: #212121;
 }
@@ -34,6 +35,51 @@ ChoiceBox> Label{
 .button:pressed{
     -fx-background-color:#E53935;
 }
+
+.conference{
+    -fx-background-color:#8BC34A;
+}
+.conference:pressed{
+    -fx-background-color: #558B2F;
+}
+
+.tweet{
+    -fx-background-color:#2196F3;
+}
+.tweet:pressed{
+    -fx-background-color: #1565C0;
+}
+
+.comunity{
+    -fx-background-color:#009688;
+}
+.comunity:pressed{
+    -fx-background-color: #00695C;
+}
+
+.newspaper{
+    -fx-text-fill: #212121;
+    -fx-background-color:#FFC107;
+}
+.newspaper:pressed{
+    -fx-text-fill: #212121;
+
+    -fx-background-color: #FF8F00;
+}
+
+.evangelist{
+    -fx-background-color:#673AB7;
+}
+.evangelist:pressed{
+    -fx-background-color: #4527A0;
+}
+.others{
+    -fx-background-color:#607D8B;
+}
+.others:pressed{
+    -fx-background-color: #37474F;
+}
+
 .button Text {
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
 }

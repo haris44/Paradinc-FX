@@ -230,14 +230,12 @@ public class TimelineView {
         grid.add(validate, 2,currentRow);
 
         currentRow +=1;
-        Separator separator = new Separator();
-
-        Separator separator2 = new Separator();
-
-        grid.add(separator, 1,currentRow);
-        grid.add(separator2, 2,currentRow);
-
+        for (Integer x = 0; x < 5; x++){
+            Separator separator = new Separator();
+            grid.add(separator, x,currentRow);
+        }
         currentRow +=1;
+
 
 
         // first we need to select a region, where our action will be executed
@@ -260,6 +258,7 @@ public class TimelineView {
         closeModalBtn.setMaxWidth(300);
         closeModalBtn.setWrapText(true);
         closeModalBtn.getStyleClass().add("button");
+        closeModalBtn.getStyleClass().add("others");
 
         closeModalBtn.setOnAction(e -> closeModal(modal));
 
@@ -366,6 +365,7 @@ public class TimelineView {
                 row5++;
             }
             else {
+                btn.getStyleClass().add("others");
                 grid.add(btn,5,8);
                 row5++;
             }
