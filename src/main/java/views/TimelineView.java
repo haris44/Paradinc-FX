@@ -470,7 +470,7 @@ public class TimelineView {
         grid.setPrefHeight(300);
         grid.setPrefWidth(300);
         grid.setPadding(new Insets(5));
-        
+
         return grid;
     }
 

@@ -85,3 +85,8 @@ ChoiceBox> Label{
 .button Text {
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
 }
+.logo{
+    -fx-background: #20629F;
+    -fx-background-image: url("paradinc.png");
+    -fx-background-repeat: no-repeat;
+}
