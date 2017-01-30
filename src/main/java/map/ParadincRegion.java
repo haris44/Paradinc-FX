@@ -22,11 +22,13 @@ public class ParadincRegion {
 
 	public void setContamination(int contamination) {
 		this.contamination = contamination;
-	
-
 	}
 
 	public String getName() {
 		return name;
 	}
+
+	public  String toString(){
+	    return name;
+    }
 }

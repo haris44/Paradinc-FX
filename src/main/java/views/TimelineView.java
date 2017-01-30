@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import map.ParadincRegion;
 import model.actions.Tweet;
 import model.events.Event;
 import model.events.ThrowableEvent;
@@ -45,6 +46,7 @@ public class TimelineView {
     final private ObservableList<Tweet> tweets;
     Text modalStarsCounter = new Text();
     Label modalStarsLabel = new Label("Stars disponibles");
+    ChoiceBox<ParadincRegion> cbRegions ;
 
     public TimelineView(Stage stage, GameController controller){
 
@@ -216,6 +218,7 @@ public class TimelineView {
 
         currentRow+=1;
 
+
         Button validate = createButton("Valider les modifications du langage");
         validate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -240,6 +243,15 @@ public class TimelineView {
         currentRow +=1;
 
 
+        // first we need to select a region, where our action will be executed
+        Label regionsLabel = new Label("Region :");
+        grid.add(regionsLabel,0,currentRow);
+
+        ArrayList<ParadincRegion> regions = gameCtrl.getGame().getRegionController().getListRegions();
+        cbRegions = new ChoiceBox(FXCollections.observableArrayList(regions));
+        grid.add(cbRegions,1,currentRow);
+
+        currentRow+=1;
 
         Integer col = 0;
         for (Iterator<Button> I = getBuyableEventsButtons(modal).iterator(); I.hasNext(); ) {
@@ -309,6 +321,7 @@ public class TimelineView {
                 @Override
                 public void handle(ActionEvent e) {
                     ThrowableEvent throwableEvent = event.getThrowable(gameCtrl.getGame());
+                    throwableEvent.setRegion(cbRegions.getValue());
                     gameCtrl.turnEvent.add(throwableEvent);
                     closeModal(stage);
                 }

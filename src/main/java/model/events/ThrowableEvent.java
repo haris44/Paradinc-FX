@@ -11,6 +11,15 @@ import views.TimelineView;
  */
 public class ThrowableEvent {
 	public Event event;
+
+	public ParadincRegion getRegion() {
+		return region;
+	}
+
+	public void setRegion(ParadincRegion region) {
+		this.region = region;
+	}
+
 	ParadincRegion region;
 	public int durability;
 	public int probability;
