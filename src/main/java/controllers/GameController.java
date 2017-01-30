@@ -93,7 +93,7 @@ public class GameController {
 
         Random rand = new Random();
 
-        int nombrePickEvent = rand.nextInt(MAX_RANDOM_EVENT); // nombre d'event qui vont être picked
+        int nombrePickEvent = rand.nextInt(MAX_RANDOM_EVENT);
 
         game.setPossibleEvent(new ArrayList<>());
         for (Event ev :game.getEvent()) {

@@ -39,6 +39,8 @@ public class TimelineView {
     private Integer turnNumber = 0;
     private Slider robustness;
     private Slider facility;
+    private Integer lastStars ;
+    private Integer lastPropagation;
     private ListView<Tweet> tweetsView;
     final private ObservableList<Tweet> tweets;
     Text modalStarsCounter = new Text();
@@ -49,6 +51,8 @@ public class TimelineView {
 
         this.gameCtrl = controller;
         this.stage = stage;
+        lastStars = gameCtrl.getStars();
+        lastPropagation = gameCtrl.getGame().getRegionController().getGlobalContamination();
         Integer currentRow = 0;
         grid.getStylesheets().add(
                 getClass().getResource("../Form.css").toExternalForm()
@@ -72,21 +76,24 @@ public class TimelineView {
         starsCounterLabel.getStyleClass().add("title");
         grid.add(starsCounterLabel, 0, currentRow);
         starsCounter = new Text(gameCtrl.getGame().getStars().toString());
-        grid.add(starsCounter, 1,currentRow);
+        currentRow +=1;
+
+        grid.add(starsCounter, 0,currentRow);
 
         currentRow +=1;
 
         Text globalInfectionLabel = new Text("Population infectée :");
         globalInfectionLabel.getStyleClass().add("title");
         grid.add(globalInfectionLabel,0,currentRow);
-        Integer infection = gameCtrl.getGame().getRegionController().getGlobalContamination();
-        globalInfection = new Text(infection + "%");
-
         currentRow +=1;
 
+        Integer infection = gameCtrl.getGame().getRegionController().getGlobalContamination();
+        globalInfection = new Text(infection + "%");
         grid.add(globalInfection,0,currentRow);
 
         currentRow+=1;
+        currentRow+=1;
+
         /* we add to the grid all events that we can throw */
         Text throwableEventsLabel = new Text("Actions possibles");
         Button eventsButton = createButton("Actions");
@@ -162,10 +169,14 @@ public class TimelineView {
     public synchronized void notifyTurn(){
         turnNumber += 1;
         turnCounter.setText(turnNumber.toString());
-        starsCounter.setText(gameCtrl.getGame().getStars().toString());
-        Integer infection = gameCtrl.getGame().getRegionController().getGlobalContamination();
-        globalInfection.setText(infection + "%");
+        Integer starsGap = gameCtrl.getStars()-lastStars;
+        Integer infectionGap = gameCtrl.getGame().getRegionController().getGlobalContamination()-lastPropagation;
 
+        starsCounter.setText("("+starsGap+") " + gameCtrl.getStars().toString());
+        Integer infection = gameCtrl.getGame().getRegionController().getGlobalContamination();
+        globalInfection.setText("("+infectionGap+") "+infection + "%");
+        lastStars = gameCtrl.getStars();
+        lastPropagation = gameCtrl.getGame().getRegionController().getGlobalContamination();
     }
 
     public void win() {
@@ -332,6 +343,7 @@ public class TimelineView {
 
         ArrayList<Event> events = gameCtrl.getGame().getBuyableEvents();
         Text error = new Text("");
+        error.getStyleClass().add("error");
         grid.add(error, 2,currentRow);
         currentRow++;
         grid.add(new Text("Conferences"),0,currentRow);

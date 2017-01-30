@@ -44,7 +44,7 @@ public class Map {
 
         topBarPan = new StackPane();
 
-        topBarPan.setBackground(new Background(new BackgroundFill(Color.web("#3f3f4f"), CornerRadii.EMPTY, Insets.EMPTY)));
+        topBarPan.setBackground(new Background(new BackgroundFill(Color.web("#212121"), CornerRadii.EMPTY, Insets.EMPTY)));
         topBarPan.getStyleClass().add("title");
         topBarPan.setMinHeight(WindowSize.TOP_BAR_Y);
         topBarPan.setMaxHeight(WindowSize.TOP_BAR_Y);
