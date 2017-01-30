@@ -5,6 +5,7 @@ import controllers.GameController;
 import factory.GameFactory;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -14,9 +15,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import map.ParadincRegion;
 import model.*;
 import model.language.*;
 import utils.*;
@@ -46,7 +51,7 @@ public class Form {
     private Text platformsError;
     private Text facilityError;
     private Text robustnessError;
-
+    ChoiceBox<String> cbRegions ;
 
     public Form(Stage primaryStage){
 
@@ -107,8 +112,20 @@ public class Form {
         grid.add(facilityError,3,5);
         this.facility = facility.x;
 
+
+
+        Text labelCb = new Text("Choisissez la région de départ");
+        labelCb.getStyleClass().add("title");
+        ArrayList regions = new ArrayList<String>(Arrays.asList("Europe","Amerique","Afrique","Océanie","Asie"));
+        cbRegions = new ChoiceBox(FXCollections.observableArrayList(regions));
+        cbRegions.getSelectionModel().selectFirst();
+        grid.add(labelCb,0,6);
+
+        grid.add(cbRegions,1,6);
+
         HBox hbBtn = createButton();
-        grid.add(hbBtn, 0, 7);
+        grid.add(hbBtn, 0, 8);
+
     }
 
     public GridPane createGrid(){
@@ -197,7 +214,7 @@ public class Form {
                     lang.setAttributes(attr);
                     System.out.println(lang.toString());
 
-                    Game game = GameFactory.createGame(lang, selectedStars);
+                    Game game = GameFactory.createGame(lang, selectedStars,cbRegions.getValue());
                     // now that or game have a language, we can start tu turn loop !
                     new GameController(primaryStage, game).startGame();
                 }

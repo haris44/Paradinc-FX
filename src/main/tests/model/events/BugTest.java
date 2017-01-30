@@ -34,7 +34,7 @@ public class BugTest {
 
 		// create bug
 		inc = new Bug("Out Of Memory", -10, -2, 0, plt , new Pair<>(15, 3.0), new Pair<>(30, 5.0));
-		game = GameFactory.createGame(lang, 20);
+		game = GameFactory.createGame(lang, 20,"Europe");
 		thrEv = inc.getThrowable(game);
 	}
 

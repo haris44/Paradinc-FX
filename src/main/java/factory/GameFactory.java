@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class GameFactory {
 
-    public static Game createGame(Language language, Integer stars){
+    public static Game createGame(Language language, Integer stars, String region){
         ArrayList<Event> event = new ArrayList<Event>();
 
         ArrayList<Attribute> allPlatform = new ArrayList<Attribute>(3){{
@@ -50,7 +50,7 @@ public class GameFactory {
         ParadincRegionController regionController = ParadincRegionFactory.createRegion();
 
         // SET DEFAULT CONTAMINATION OF FIRST REGIONS HERE
-        ParadincRegion europe = regionController.getRegions("Europe");
+        ParadincRegion europe = regionController.getRegions(region);
         europe.setContamination(30);
 
         return new Game(regionController, language, stars, event);

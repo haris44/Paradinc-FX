@@ -25,7 +25,7 @@ public class IncompatibilityTest {
 		Language lang = new Language("test", 100, 0);
 		lang.setAttributes(new ArrayList<Attribute>(){{ add(0, Platform.fromPlatformType(PlatformType.Linux));}});
 		Incompatibility inc = new Incompatibility("test", 0, 0, 0, new ArrayList<Attribute>(){{ add(0, Platform.fromPlatformType(PlatformType.Linux));}});
-		game = GameFactory.createGame(lang, 20);
+		game = GameFactory.createGame(lang, 20,"Europe");
 		thrEv = inc.getThrowable(game);
 	}
 

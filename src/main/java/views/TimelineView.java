@@ -39,6 +39,7 @@ public class TimelineView {
     private Integer turnNumber = 0;
     private Slider robustness;
     private Slider facility;
+    private Integer lastStars ;
     private ListView<Tweet> tweetsView;
     final private ObservableList<Tweet> tweets;
     Text modalStarsCounter = new Text();
@@ -49,6 +50,7 @@ public class TimelineView {
 
         this.gameCtrl = controller;
         this.stage = stage;
+        lastStars = gameCtrl.getStars();
         Integer currentRow = 0;
         grid.getStylesheets().add(
                 getClass().getResource("../Form.css").toExternalForm()
@@ -162,10 +164,11 @@ public class TimelineView {
     public synchronized void notifyTurn(){
         turnNumber += 1;
         turnCounter.setText(turnNumber.toString());
-        starsCounter.setText(gameCtrl.getGame().getStars().toString());
+        Integer gap = gameCtrl.getStars()-lastStars;
+        starsCounter.setText("("+gap+")" + gameCtrl.getStars().toString());
         Integer infection = gameCtrl.getGame().getRegionController().getGlobalContamination();
         globalInfection.setText(infection + "%");
-
+        lastStars = gameCtrl.getStars();
     }
 
     public void win() {
@@ -332,6 +335,7 @@ public class TimelineView {
 
         ArrayList<Event> events = gameCtrl.getGame().getBuyableEvents();
         Text error = new Text("");
+        error.getStyleClass().add("error");
         grid.add(error, 2,currentRow);
         currentRow++;
         grid.add(new Text("Conferences"),0,currentRow);

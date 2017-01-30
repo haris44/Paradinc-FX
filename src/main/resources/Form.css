@@ -63,7 +63,6 @@ ChoiceBox> Label{
 }
 .newspaper:pressed{
     -fx-text-fill: #212121;
-
     -fx-background-color: #FF8F00;
 }
 
@@ -79,7 +78,9 @@ ChoiceBox> Label{
 .others:pressed{
     -fx-background-color: #37474F;
 }
-
+.error{
+    -fx-text-fill: #E53935;
+}
 .button Text {
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
 }
