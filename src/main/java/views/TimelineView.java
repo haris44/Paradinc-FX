@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import map.ParadincRegion;
 import model.actions.Tweet;
+import model.events.Conference;
 import model.events.Event;
 import model.events.ThrowableEvent;
 import utils.Triple;
@@ -255,8 +256,8 @@ public class TimelineView {
         currentRow+=1;
 
         Integer col = 0;
-        for (Iterator<Button> I = getBuyableEventsButtons(modal).iterator(); I.hasNext(); ) {
-            Button btn = I.next();
+        getBuyableEventsButtons(modal, grid, currentRow, col)
+
             grid.add(btn,col,currentRow);
             currentRow +=  col.equals(0) ? 0 : 1;
             col = col.equals(0) ? 1 : 0;
@@ -310,11 +311,17 @@ public class TimelineView {
         return new Triple<Slider,Label,Label>(slider,label,labelValue);
     }
 
-    public ArrayList<Button> getBuyableEventsButtons(Stage stage) {
-        ArrayList buttons = new ArrayList<HBox>();
+    public void getBuyableEventsButtons(Stage stage, GridPane grid, Integer currentRow) {
+
+
         ArrayList<Event> events = gameCtrl.getGame().getBuyableEvents();
+        Integer row1 = currentRow;
+        Integer row2 = currentRow;
+        Integer row3 = currentRow;
+
         for (Iterator<Event> I = events.iterator(); I.hasNext(); ) {
            Event event = I.next();
+           Integer col;
            String label = new String("(-" + event.getPrice()  +  " stars)  " + event.getName() );
            Button btn = createButton(label);
            TimelineView self = this;
@@ -327,9 +334,21 @@ public class TimelineView {
                     closeModal(stage);
                 }
             });
-            buttons.add(btn);
+            if( event instanceof Conference){
+                grid.add(btn,0,row1);
+                row1 ++;
+            }
+          /*  else if (event instanceof Tweet ) {
+                grid.add(btn,1,row2);
+                row2++;
+            }*/
+            else{
+                grid.add(btn,2,row3);
+                row3++;
+            }
+            currentRow +=  col.equals(0) ? 0 : 1;
+            col = col.equals(0) ? 1 : 0;
         }
-        return buttons;
     }
 
     private void closeModal(Stage stage){
