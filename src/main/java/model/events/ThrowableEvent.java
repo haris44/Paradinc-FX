@@ -19,23 +19,16 @@ public class ThrowableEvent {
 
 	// MUST REFACTO WITH GETTER AND SETTER
 	public void throwEvent(GameController game, TimelineView timelineView ){
+
 		game.setStars(game.getStars() - price);
 		timelineView.tweet(this.event.nom);
-		int stars;
-		int contamination;
-		double probaLenght;
-		if(price > 0){
-			probaLenght = ((float) probability) / 100.0;
-			stars = (int) Math.round(event.lenghtStars * probaLenght);
-			contamination = (int) Math.round(event.lenghtContamination * probaLenght);
-		} else {
-			probaLenght = 0;
-			stars = event.lenghtStars;
-			contamination =event.lenghtContamination;
-		}
+
+		double probaLenght = ((float) probability) / 100.0;
+		int stars = (int) Math.round(event.lenghtStars * probaLenght);
+		int contamination = (int) Math.round(event.lenghtContamination * probaLenght);
+
 		region.setContamination(region.getContamination() + contamination);
 		game.setStars(game.getStars() + stars);
-
 
 		// REMOVE BEFORE FLIGHT
 		System.out.println("====== THROW EVENT ======");

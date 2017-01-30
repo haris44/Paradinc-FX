@@ -14,8 +14,8 @@ public class ParadincRegionFactory {
 
 		ParadincMap map = new ParadincMap();
 
-		ParadincRegion europe = new ParadincRegion("Europe", map.getEurope());
-		ParadincRegion amerique = new ParadincRegion("Amerique", map.getAmerica());
+		ParadincRegion europe = new ParadincRegion("Europe", map.getEurope(), map.getWorld());
+		ParadincRegion amerique = new ParadincRegion("Amerique", map.getAmerica(), map.getWorld());
 		controller.addRegions(europe);
 		controller.addRegions(amerique);
 

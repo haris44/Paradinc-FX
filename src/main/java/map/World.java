@@ -81,9 +81,11 @@ import static javafx.scene.input.MouseEvent.MOUSE_RELEASED;
  */
 @DefaultProperty("children")
 public class World extends Region {
+
+
     public enum Resolution { HI_RES, LO_RES };
     private static final StyleablePropertyFactory<World> FACTORY          = new StyleablePropertyFactory<>(Region.getClassCssMetaData());
-    private static final String                          HIRES_PROPERTIES = "map/hires.properties";
+    public static final String                          HIRES_PROPERTIES = "map/hires.properties";
     private static final String                          LORES_PROPERTIES = "map/lores.properties";
     private static final double                          PREFERRED_WIDTH  = 1009;
     private static final double                          PREFERRED_HEIGHT = 665;
@@ -493,6 +495,13 @@ public class World extends Region {
     private void setPivot(final double X, final double Y) {
         setTranslateX(getTranslateX() - X);
         setTranslateY(getTranslateY() - Y);
+    }
+
+    public void setFillColorOfRegion(CountryRegion regions, Color color) {
+        for(Country cnt : regions.getCountries()){
+            final List<CountryPath> PATHS = countryPaths.get(cnt.getName());
+            for (SVGPath path : PATHS) { path.setFill(color); }
+        }
     }
 
     private void handleMouseEvent(final MouseEvent EVENT, final EventHandler<MouseEvent> HANDLER) {
