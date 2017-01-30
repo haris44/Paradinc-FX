@@ -29,13 +29,7 @@ public class GameFactory {
         event.add(new Bug("Lenteur de traitement", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(70, 1.0), new Pair<>(0, 0.0)));
         event.add(new Bug("Utilisation processeur intensive", -10, -2, 0, PlatformArray.getAllPlatform(), new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
 
-        event.add(new NewsPaper("Création d’une weekly",30,10,5 new Pair<>(100,1), new Pair<>(0,2)));
-        event.add(new NewsPaper("Developpez.com publie un article élogieux sur la facilité de votre lanage",10,5,5 new Pair<>(5,4), new Pair<>(0,2)));
-        event.add(new NewsPaper("Jetbrains annonce le support de votre langage",100,30,40 new Pair<>(55,5), new Pair<>(35,5)));
-        event.add(new NewsPaper("Extension Atom",15,5,5 new Pair<>(25,5), new Pair<>(0,5)));
-        event.add(new NewsPaper("Developpez.com qualifie votre langage de naufrage",0,-10,-10 new Pair<>(0,2), new Pair<>(0,5)));
-        event.add(new NewsPaper("Une catastrophe aérienne survient a cause de votre lanage",0,-50,-60 new Pair<>(0,5), new Pair<>(80,4)));
-        event.add(new NewsPaper("La NASA perd le contrôle d'un rover martien suite à un bug dans votre langage",0,-40,40 new Pair<>(0,0), new Pair<>(80,5)));
+        event.add(new NewsPaper("Utilisation processeur intensive", -10, -2, 0,  new Pair<>(30, 0.4), new Pair<>(0, 0.0)));
 
 
 
