@@ -116,7 +116,7 @@ public class Form {
 
         Text labelCb = new Text("Choisissez la région de départ");
         labelCb.getStyleClass().add("title");
-        ArrayList regions = new ArrayList<String>(Arrays.asList("Europe","Amerique","Afrique","Océanie","Asie"));
+        ArrayList regions = new ArrayList<String>(Arrays.asList("Europe","Amerique","Afrique","Océanie"));
         cbRegions = new ChoiceBox(FXCollections.observableArrayList(regions));
         cbRegions.getSelectionModel().selectFirst();
         grid.add(labelCb,0,6);
