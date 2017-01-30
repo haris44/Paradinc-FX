@@ -49,6 +49,12 @@ public class GameFactory {
         event.add(new Conference("Conférence dans une grande salle", 70, -20, -10, new Pair<>(80, 5.0), new Pair<>(80, 5.0), new Pair<>(80, 2.0)));
         event.add(new Conference("Conférence qui critique la facilité", 0, -70, -50, new Pair<>(80, 7.0), new Pair<>(10, 7.0), new Pair<>(40, 2.0)));
         event.add(new Conference("Conférence qui critique la fiabilité", 0, -70, -50, new Pair<>(10, 7.0), new Pair<>(80, 7.0), new Pair<>(40, 2.0)));
+
+        event.add(new Tweet("Quentin Adam promeux votre langage",0,10,2,PlatformArray.getAllPlatform(), new Pair<>(25,5.0), new Pair<>(2(,5.0))));
+        event.add(new Tweet("Votre tweet annonçant la nouvelle version atteiind les 200RT",0,6,1,PlatformArray.getAllPlatform(), new Pair<>(100,1.0), new Pair<>(100,1.0)));
+        event.add(new Tweet("De plus en plus de dev conçoivent des POC avec votre langage",0,15,5,PlatformArray.getAllPlatform(),new Pair<>(25,2.0), new Pair<>(25,3.0)));
+        event.add(new Tweet("Vimaire44 aime tout les tweets concernant votre lanage",0,4,1,PlatformArray.getAllPlatform(), new Pair<>(55,3.0), new Pair<>(15,7.0)));
+        event.add(new Tweet("Gcouprie créer une liste concernant votre lanage",0,7,3,PlatformArray.getAllPlatform(), new Pair<>(55,5.0), new Pair<>(75,4.0)));
         
 
         ParadincRegionController regionController = ParadincRegionFactory.createRegion();
